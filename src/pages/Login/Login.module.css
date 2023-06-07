@@ -1,0 +1,155 @@
+.login {
+  padding: 0px 60px;
+}
+
+.logo img {
+  width: 100px;
+  margin-right: 30px;
+}
+
+.login-btn {
+  border: none;
+  width: 100px;
+  height: 32px;
+  border-radius: 5px;
+  background: rgb(225, 9, 9);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.logo {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.login .logo {
+  width: 148px;
+}
+
+.login-container {
+  display: grid;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  height: 650px;
+  padding: 60px 68px 40px;
+  margin: 0px 0px 90px;
+  justify-self: center;
+  background-color: #0000009d;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: none;
+}
+
+.login-content-top {
+  height: 360px;
+  width: 314px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-content-top h1 {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 28px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-input-email,
+.login-input-password {
+  margin-bottom: 40px;
+  border: none;
+  background-color: #333333;
+  border-radius: 5px;
+  height: 50px;
+  color: #ffff;
+  line-height: 50px;
+  padding: 16px 20px 0px;
+  outline: none;
+}
+.login-content-btn {
+  text-align: center;
+  border: none;
+  width: 314px;
+  height: 48px;
+  border-radius: 5px;
+  background: rgb(225, 9, 9);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 12px;
+}
+
+.login-content-form-help {
+  padding: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  color: #b3b3b3;
+  font-size: 13px;
+}
+
+.input-login-rememberme input {
+  margin-right: 4px;
+}
+
+.login-content-form-help a {
+  text-decoration: none;
+  color: #b3b3b3;
+  font-size: 13px;
+  font-weight: 400;
+}
+.login-content-bottom {
+  overflow-y: hidden;
+  color: #737373;
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 16px;
+}
+.login-content-bottom a {
+  text-decoration: none;
+  margin-left: 5px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.login-signup-now {
+  margin-bottom: 15px;
+}
+.login-signup-now a {
+  font-size: 18x;
+}
+
+.recaptcha-terms-of-use {
+  font-size: 13px;
+}
+
+.recaptcha-terms-of-use--link-button {
+  background-color: transparent;
+  border: none;
+  color: #0071eb;
+  cursor: pointer;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+.cha-terms-of-use--disclosure {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.cha-terms-of-use--disclosure a {
+  font-size: 13px;
+}

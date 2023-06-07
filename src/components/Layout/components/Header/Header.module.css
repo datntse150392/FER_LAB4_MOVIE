@@ -1,0 +1,47 @@
+.header {
+  overflow: hidden;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+}
+
+.header-logo {
+  overflow: hidden;
+}
+.header-logo img {
+  width: 100px;
+  margin-right: 30px;
+}
+
+.header-login-btn {
+  border: none;
+  width: 100px;
+  height: 32px;
+  border-radius: 5px;
+  background: rgb(225, 9, 9);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .header-logo img {
+    width: 80px;
+    margin-right: 30px;
+  }
+
+  .header-login-btn {
+    border: none;
+    width: 80px;
+    height: 32px;
+    border-radius: 5px;
+    background: rgb(225, 9, 9);
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}

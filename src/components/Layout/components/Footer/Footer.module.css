@@ -1,0 +1,73 @@
+.footer {
+  margin-top: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer-bottom {
+  padding: 10px 0px;
+}
+
+.footer-bottom-input {
+  width: 200px;
+  height: 30px;
+  margin: 0px 10px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 5px;
+}
+.footer-bottom-btn {
+  height: 30px;
+  width: 80px;
+  border-radius: 5px;
+  background-color: red;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.footer-top-title {
+  overflow: hidden;
+  color: #fff;
+}
+
+.FAQ {
+  margin-top: 50px;
+  border-top: 5px solid #5c5b5b;
+  display: flex;
+  flex-direction: column;
+}
+
+.FAQ h2 {
+  font-size: 48px;
+  font-style: blod;
+  font-weight: 900;
+  color: #fff;
+  margin: 20px 0px;
+  overflow: hidden;
+}
+
+.FAQ ul li {
+  margin: 10px 10px;
+  text-align: -webkit-center;
+}
+
+.FAQ ul li button {
+  width: 70%;
+  height: 80px;
+  background-color: #5c5b5b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 10px;
+}
+
+.FAQ ul li button h3 {
+  font-size: 24px;
+  margin-left: 20px;
+}

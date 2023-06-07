@@ -1,0 +1,47 @@
+@import "normalize.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Markazi+Text:wght@500&family=Oswald:wght@200;300;400;500;600;700&family=Rokkitt:wght@100&family=Titillium+Web:wght@200&display=swap");
+
+:root {
+  background-image: url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80);
+  background-size: cover;
+  object-fit: cover;
+}
+
+body {
+  padding-right: -10px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+}
+
+*::-webkit-scrollbar {
+  width: 0px;
+}
+
+html {
+}
+
+button,
+input,
+[tabindex] {
+  outline: none;
+  border: none;
+}
+
+a[href] {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.defaultLayout {
+  background-size: cover;
+  object-fit: cover;
+  background: rgb(0 0 0 / 40%);
+}

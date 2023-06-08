@@ -16,9 +16,9 @@ export default function HeaderForFilmLayout() {
         <li style={{ fontWeight: "bold" }}>
           <Link to="/film/homePage">Mới & Phổ biến</Link>
         </li>
-        <li style={{ fontWeight: "" }}>
+        {/* <li style={{ fontWeight: "" }}>
           <Link to="/film/newFilm">Danh sách Phim của bạn</Link>
-        </li>
+        </li> */}
       </ul>
       <AccountMenu />
     </div>

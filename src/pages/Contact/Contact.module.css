@@ -1,0 +1,202 @@
+/* Header */
+.header {
+  overflow: hidden;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+}
+
+.header-logo {
+  overflow: hidden;
+}
+.header-logo img {
+  width: 100px;
+  margin-right: 30px;
+}
+
+.header-login-btn {
+  border: none;
+  width: 100px;
+  height: 32px;
+  border-radius: 5px;
+  background: rgb(225, 9, 9);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.header-theme-btn {
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
+  width: 130px;
+  height: 32px;
+  border-radius: 5px;
+  background: rgba(79, 78, 78, 0.101);
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .header-logo img {
+    width: 80px;
+    margin-right: 30px;
+  }
+
+  .header-login-btn {
+    border: none;
+    width: 80px;
+    height: 32px;
+    border-radius: 5px;
+    background: rgb(225, 9, 9);
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+/* Header */
+
+.contact-container {
+  display: grid;
+  background-size: cover;
+  object-fit: cover;
+  background-color: rgb(0 0 0 / 40%);
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.44),
+      rgba(0, 0, 0, 0.715)
+    ),
+    url(https://assets.nflxext.com/ffe/siteui/vlv3/73334647-ad51-42a9-b07b-93298cc2a8e1/a13fedda-da19-4b61-8063-5f715391b742/VN-vi-20230605-popsignuptwoweeks-perspective_alpha_website_large.jpg);
+  height: 757px;
+}
+
+.content {
+  margin-top: 5%;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  height: 650px;
+  padding: 60px 68px 40px;
+  margin: 0px 0px 90px;
+  justify-self: center;
+  background-color: #0000009d;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: none;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.content-container h1 {
+  color: #fff;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 50px;
+  margin-bottom: 32px;
+}
+
+.contactus-input-label {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  display: block;
+  margin-bottom: 0;
+  color: antiquewhite;
+}
+
+.contactus-input-text {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.footer {
+  margin-top: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer-bottom {
+  padding: 10px 0px;
+}
+
+.footer-bottom-input {
+  width: 200px;
+  height: 30px;
+  margin: 0px 10px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 5px;
+}
+.footer-bottom-btn {
+  height: 30px;
+  width: 80px;
+  border-radius: 5px;
+  background-color: red;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.footer-top-title {
+  overflow: hidden;
+  color: #fff;
+}
+
+.FAQ {
+  margin-top: 50px;
+  border-top: 5px solid #5c5b5b;
+  display: flex;
+  flex-direction: column;
+}
+
+.FAQ h2 {
+  font-size: 48px;
+  font-style: blod;
+  font-weight: 900;
+  color: #fff;
+  margin: 20px 0px;
+  overflow: hidden;
+}
+
+.FAQ ul li {
+  margin: 10px 10px;
+  text-align: -webkit-center;
+}
+
+.FAQ ul li button {
+  width: 70%;
+  height: 80px;
+  background-color: #5c5b5b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 10px;
+}
+
+.FAQ ul li button h3 {
+  font-size: 24px;
+  margin-left: 20px;
+}

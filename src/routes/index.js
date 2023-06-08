@@ -1,3 +1,4 @@
+import Contact from "../pages/Contact";
 import Content from "../pages/Content";
 import HomePage from "../pages/HomePage";
 import Login from "../pages/Login";
@@ -22,6 +23,11 @@ const publicRoutes = [
     path: "/film/homePage/:id",
     component: HomePage,
     layout: "filmLayout",
+  },
+  {
+    path: "/contact",
+    component: Contact,
+    layout: null,
   },
 ];
 // Phải đăng nhập mới vào được, còn không sẽ lái vào trang login

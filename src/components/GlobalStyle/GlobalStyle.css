@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Markazi+Text:wght@500&family=Oswald:wght@200;300;400;500;600;700&family=Rokkitt:wght@100&family=Titillium+Web:wght@200&display=swap");
 
 :root {
-  background-image: url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80);
+  background-color: black;
   background-size: cover;
   object-fit: cover;
 }
@@ -19,6 +19,7 @@ body {
   overflow-x: hidden;
   font-family: "Manrope", sans-serif;
   font-size: 16px;
+  --text-color: #fff;
 }
 
 *::-webkit-scrollbar {
@@ -43,5 +44,11 @@ a[href] {
 .defaultLayout {
   background-size: cover;
   object-fit: cover;
-  background: rgb(0 0 0 / 40%);
+  background-color: rgb(0 0 0 / 40%);
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.44),
+      rgba(0, 0, 0, 0.324)
+    ),
+    url(https://assets.nflxext.com/ffe/siteui/vlv3/73334647-ad51-42a9-b07b-93298cc2a8e1/a13fedda-da19-4b61-8063-5f715391b742/VN-vi-20230605-popsignuptwoweeks-perspective_alpha_website_large.jpg);
 }

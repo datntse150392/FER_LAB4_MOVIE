@@ -20,44 +20,6 @@ export default function Footer() {
         />
         <button className={styles["footer-bottom-btn"]}>Bắt đầu</button>
       </div>
-      {/*  */}
-
-      {/*  */}
-      {/* <div className={styles["FAQ"]}>
-        <h2>Câu hỏi thường gặp</h2>
-        <div>
-          <ul>
-            <li>
-              <button>
-                <h3>Netflix là gì?</h3>
-                <ArrowForwardIosIcon
-                  fontSize="large"
-                  style={{ marginRight: "20px" }}
-                />
-              </button>
-            </li>
-            <li>
-              <button>
-                <h3>Tôi phải trả bao nhiêu tiền để xem Netflix?</h3>
-                <ArrowForwardIosIcon
-                  fontSize="large"
-                  style={{ marginRight: "20px" }}
-                />
-              </button>
-            </li>
-            <li>
-              <button>
-                <h3>Tôi có thể xem ở đâu?</h3>
-                <ArrowForwardIosIcon
-                  fontSize="large"
-                  style={{ marginRight: "20px" }}
-                />
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div> */}
-      {/*  */}
     </div>
   );
 }

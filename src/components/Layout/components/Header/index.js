@@ -11,6 +11,9 @@ export default function Header() {
         </Link>
       </div>
       <div className={styles["header-action"]}>
+        <Link to="/contact">
+          <button className={styles["header-contact-btn"]}>Liên hệ</button>
+        </Link>
         <Link to="/login">
           <button className={styles["header-login-btn"]}>Đăng nhập</button>
         </Link>

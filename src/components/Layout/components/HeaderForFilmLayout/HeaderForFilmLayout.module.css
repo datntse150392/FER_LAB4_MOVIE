@@ -69,4 +69,9 @@
     z-index: 1;
     width: 100%;
   }
+  .nav li a {
+    padding: 0 5px;
+    font-size: 10px;
+    color: #fff;
+  }
 }

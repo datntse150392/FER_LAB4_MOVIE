@@ -263,7 +263,7 @@
     margin-left: 10%;
   }
 
-  @media only screen and (max-width: 450px) {
+  @media only screen and (max-width: 600px) and (min-width: 380px) {
     .news-top {
       margin-left: 5px;
       overflow-y: hidden;
@@ -314,14 +314,21 @@
     }
 
     .news-top img {
-      height: 100%;
+      height: 80%;
       border-radius: 5px;
-      width: 70%;
+      width: 100%;
       object-fit: fill;
     }
 
     .billboard-title img {
       width: 70%;
+    }
+
+    .news-top {
+      margin-left: 5px;
+      overflow-y: hidden;
+      height: 120px;
+      margin-bottom: -25px;
     }
   }
 }

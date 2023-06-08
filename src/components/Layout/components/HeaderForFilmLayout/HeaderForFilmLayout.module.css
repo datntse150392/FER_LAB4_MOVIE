@@ -57,7 +57,7 @@
   }
 }
 
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 600px) and (min-width: 380px) {
   .header {
     overflow: hidden;
     height: 70px;
@@ -71,26 +71,7 @@
   }
   .nav li a {
     padding: 0 5px;
-    font-size: 9px;
+    font-size: 10px;
     color: #fff;
-  }
-
-  @media only screen and (max-width: 450px) {
-    .header {
-      overflow: hidden;
-      height: 70px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 7px;
-      position: absolute;
-      z-index: 1;
-      width: 100%;
-    }
-    .nav li a {
-      padding: 0 5px;
-      font-size: 8px;
-      color: #fff;
-    }
   }
 }

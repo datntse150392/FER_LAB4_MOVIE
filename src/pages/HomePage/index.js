@@ -62,8 +62,8 @@ export default function HomePage() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: true,
           dots: true,
         },
@@ -71,9 +71,9 @@ export default function HomePage() {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          initialSlide: 3,
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
         },
       },
       {
@@ -182,7 +182,7 @@ export default function HomePage() {
           <div className={styles["billboard-title"]}>
             <img
               alt=""
-              class="title-logo"
+              className={styles["title-logo"]}
               src={dataBillBoard[transformID].imgLogo}
               title="Xác ướp"
             />

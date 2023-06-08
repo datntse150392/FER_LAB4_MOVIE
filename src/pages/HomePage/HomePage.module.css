@@ -263,7 +263,7 @@
     margin-left: 10%;
   }
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (max-width: 450px) {
     .news-top {
       margin-left: 5px;
       overflow-y: hidden;
@@ -288,7 +288,7 @@
 
     .info-container {
       width: 60%;
-      top: 8%;
+      top: 10%;
       margin-bottom: 1.2vw;
       min-height: 13.2vw;
       position: absolute;
@@ -308,7 +308,7 @@
 
     .slider-content {
       position: absolute;
-      top: 40%;
+      top: 35%;
       width: 100%;
       padding-left: 30px;
     }
@@ -318,6 +318,10 @@
       border-radius: 5px;
       width: 70%;
       object-fit: fill;
+    }
+
+    .billboard-title img {
+      width: 70%;
     }
   }
 }

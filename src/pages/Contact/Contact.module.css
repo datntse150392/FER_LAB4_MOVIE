@@ -61,7 +61,6 @@
 }
 
 /* Header */
-
 .contact-container {
   display: grid;
   background-size: cover;
@@ -77,7 +76,8 @@
 }
 
 .content {
-  margin-top: 5%;
+  margin-top: 13%;
+  text-align: -webkit-center;
 }
 
 .contact-content {
@@ -98,7 +98,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 80%;
 }
 
 .content-container h1 {
@@ -129,7 +129,7 @@
 }
 
 .footer {
-  margin-top: 25%;
+  margin-top: 18%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -199,4 +199,48 @@
 .FAQ ul li button h3 {
   font-size: 24px;
   margin-left: 20px;
+}
+
+/* Responsive */
+@media only screen and (max-width: 600px) and (min-width: 380px) {
+  /* Content  */
+  .contact-container {
+    display: grid;
+    background-size: cover;
+    object-fit: cover;
+    background-color: rgb(0 0 0 / 40%);
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(0, 0, 0, 0.44),
+        rgba(0, 0, 0, 0.715)
+      ),
+      url(https://assets.nflxext.com/ffe/siteui/vlv3/73334647-ad51-42a9-b07b-93298cc2a8e1/a13fedda-da19-4b61-8063-5f715391b742/VN-vi-20230605-popsignuptwoweeks-perspective_alpha_website_large.jpg);
+    height: 600px;
+  }
+
+  .content-container h1 {
+    color: #fff;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 50px;
+    margin-bottom: 32px;
+  }
+
+  .contactus-input-label {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 27px;
+    display: block;
+    margin-bottom: 0;
+    color: antiquewhite;
+  }
+
+  .contactus-input-text {
+    outline: none;
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 20px;
+  }
 }

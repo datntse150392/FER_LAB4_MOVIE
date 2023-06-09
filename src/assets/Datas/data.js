@@ -280,4 +280,93 @@ export const Films = [
     description:
       "Đầu bếp tài năng Diệp Giai Dao gặp rắc rối lớn khi cô bị đưa đến Trung Hoa cổ đại một cách bí ẩn rồi đính hôn với thủ lĩnh của một băng cướp.",
   },
+  {
+    id: 17,
+    title: "Cao thủ bóng rổ",
+    billboard: true,
+    state: "",
+    type: "Phim Anime",
+    duration: "8 mùa",
+    director: "",
+    actor:
+      "Kusao Takeshi, Hiramatsu Akiko, Yanada Kiyoyuki, Midorikawa Hikaru, Okiayu Ryotaro, Shioya Yoku, Morikawa Toshiyuki, Hara Eriko, Nishimura Tomomichi, Mikimoto Yuji, Shioya Kozo, Canna Nobutoshi, Tanaka Hideyuki",
+    img: "https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABfsnW15zMGJZQdmMM59KV-P0F3aBDaYoxF8hS_D25QmgjJ5ivMIX_eMh2yxmNEsU4eoVBmeNdcFCyZwsN1nF963SrpPVfTwIwtg.webp?r=e71",
+    imgBG:
+      "https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABQItt0nHHMuFcd0WlYorJbZFxdiPDCRw4W7dPS6s_YACB5d7O5Fb3Iji2Dl1DmtsSVqlUIO-KBVfrcUUT7tqSFSTr5WU6ssBj8Z6.webp?r=b9f",
+    imgLogo:
+      "https://occ-0-325-395.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABQSsurMhNoVBHHduCAVQUrJBWtJb7BBGzVTHhKijSWGt_6l5r8_lRgLjFnkBPXLRz2DSLS4C7rn0eNZcNM9b1ieiYKeWFKkdPWPR4GhEyZ-C.webp?r=768",
+    trailerURL: "https://www.youtube.com/watch?v=NEa0J_Q-NIY",
+    description:
+      "Nam sinh trung học cá biệt Sakuragi Hanamichi gia nhập đội bóng rổ. Hành trình vươn tới ngôi vô địch cũng là hành trình cậu khám phá tài năng chơi bóng của bản thân.",
+  },
+  {
+    id: 18,
+    title: "Hoàn hồn",
+    billboard: false,
+    state: "trending",
+    type: "Phim Hàn Quốc",
+    duration: "2 phần",
+    director: "Park Joon Hwa, Hong Jeong Eun, Hong Mi Ran",
+    actor:
+      "Lee Jae Wook, Go Youn Jung, Hwang Min Hyun, Yu Jun Sang, Shin Seung Ho, Oh Na Ra, Jo Jae Yun, Yoo In Soo, ARIN, Jung So Min",
+    img: "https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABdN8EKzfZ9CjP93aIacyeckHitJtY0vz0q4goLl3qIpw7y__4I6CWy8fEbC8-Uds-9rfnk6mnDPv1Uvvluxdmco5-ED6mlAWQQ9ENpYz6wTseZVcMScBDWuBH-n4iJk9_SXg.jpg?r=b94",
+    imgBG: "",
+    imgLogo: "",
+    trailerURL: "https://www.youtube.com/watch?v=sLR6ma7vKxo",
+    description:
+      "Một thuật sư quyền năng trong cơ thể của một nữ nhân mù tình cờ gặp một nam nhân xuất thân từ gia đình danh giá, cũng là người muốn nàng giúp thay đổi số phận của mình.",
+  },
+  {
+    id: 19,
+    title: "Hoàng hậu Ki",
+    billboard: false,
+    state: "trending",
+    type: "Phim Hàn Quốc",
+    duration: "51 tập",
+    director: "Han Hee, Lee Seong Jun, Jang Yeong Cheol, Jeong Gyeong Sun",
+    actor:
+      "Ha Ji Won, Joo Jin Mo, Ji Chang Wook, Baek Jin Hee, Kim Seo Hyung, Jeon Kook Hwan, Lee Won Jong, Lee Moon Sik, Kwon Oh Jung, Choi Mu Sung, Kim Young Ho, Jin Yi Han, Yoo In Young",
+    img: "https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABbcrvFD9ck41c_eAfWCyRfWYhl5DBRV0dzdwpvzDz2vPvCtSLcdV1WqZzpq75Tbl783GVcg38llhrKjsFevi9vDInLuWpuu1KWs.webp?r=2ff",
+    imgBG: "",
+    imgLogo: "",
+    trailerURL: "https://www.youtube.com/watch?v=IQ5nPjxanBA",
+    description:
+      "Một nữ nhân sinh ra ở Hàn Quốc xoay sở với tình yêu, chiến tranh, chính trị và lòng trung quân ái quốc để trở thành hoàng hậu uy quyền trong Nguyên triều của Trung Quốc.",
+  },
+  {
+    id: 20,
+    title: "7 ngày làm vương hậu",
+    billboard: true,
+    state: "trending",
+    type: "Phim Hàn Quốc",
+    duration: "20 tập",
+    director: "Han Hee, Lee Seong Jun, Jang Yeong Cheol, Jeong Gyeong Sun",
+    actor:
+      "Ha Ji Won, Joo Jin Mo, Ji Chang Wook, Baek Jin Hee, Kim Seo Hyung, Jeon Kook Hwan, Lee Won Jong, Lee Moon Sik, Kwon Oh Jung, Choi Mu Sung, Kim Young Ho, Jin Yi Han, Yoo In Young",
+    img: "https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABcj0N_b6gPhSzjOhVxPU4Te5dAgEir8dXVHijKyFVaOkOFechLCq96VPl8vaOy8lOanFRgvtpIEYZCQMu8o64c_dyR_jm9TdwCU.webp?r=1dc",
+    imgBG:
+      "https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABTvSJfXI_UrZfAQL8bktKPp8t3uM1hgw0EPDVTHbJOG0ydb2I1tHHtnvr0-nQughp40iHiQoQXCX48URn_6BjP5ydVtyK7zjDee2.webp?r=109",
+    imgLogo:
+      "https://occ-0-325-395.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABYi9nhxu2IPqMEmc6MCzKCsd5kKZFAWvNpiNnABg4apUceQFGjFwqeX9dsuvJc0EEg7rr700ZB2juFfyF3ABUgEwYdby_WbtszYsTiPVGFw5.webp?r=8ed",
+    trailerURL: "https://www.youtube.com/watch?v=kfmXk72oGEM",
+    description:
+      "Vào thời Joseon, thiên kim của một gia tộc quyền lực thành hôn với Thái tử nhưng bị phế truất chỉ sau 7 ngày làm hoàng hậu khi ngài lên ngôi vua.",
+  },
+  {
+    id: 21,
+    title: "Hoa Du Ký",
+    billboard: false,
+    state: "",
+    type: "Phim Hàn Quốc",
+    duration: "20 tập",
+    director: "Hong Jeong Eun, Hong Mi Ran, Kim Byeong Su, Park Hong Kyun",
+    actor:
+      "Lee Seung Gi, Cha Seung Won, Oh Yeon Seo, Lee Hong Gi, Jang Kwang, EL, Lee Se Young, Kim Seung O",
+    img: "https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABZ1FJu61O6N914F0HQCCLmqq64sktrnK0eJlRSlrN8rq8et4WiowSOeuhxG963WHmV1nlyAwbbr2uMt8_vla4VHJ4AMuhTrbYqQ.webp?r=da0",
+    imgBG: "",
+    imgLogo: "",
+    trailerURL: "https://www.youtube.com/watch?v=j-_KV6apuTw",
+    description:
+      "Anh là sinh vật thần thoại ích kỉ khát khao trở nên bất khả chiến bại, nhưng ngờ đâu số phận lại rơi vào tay cô gái có khả năng nhìn thấy các sinh vật siêu nhiên.",
+  },
 ];

@@ -22,9 +22,9 @@ body {
   --text-color: #fff;
 }
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   width: 0px;
-}
+} */
 
 html {
 }

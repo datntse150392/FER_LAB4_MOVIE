@@ -8,11 +8,14 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import HomeIcon from "@mui/icons-material/Home";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-
+import { useNavigate, redirect, Link } from "react-router-dom";
 export default function AccountMenu() {
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -20,6 +23,13 @@ export default function AccountMenu() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("name");
+    navigate("/login");
+    window.location.reload();
   };
   return (
     <React.Fragment>
@@ -36,7 +46,7 @@ export default function AccountMenu() {
             <Avatar
               sx={{ width: 32, height: 32 }}
               alt="Remy Sharp"
-              src="https://firebasestorage.googleapis.com/v0/b/lab-film-fer201m.appspot.com/o/AVT%2Fb0da176dc52a14744d3b.jpg?alt=media&token=011e4af2-e869-4aa8-9b26-7ba848ee93d8&_gl=1*o4igok*_ga*MTU1OTk0NzM3OC4xNjgzNTA1MDE2*_ga_CW55HF8NVT*MTY4NTgwOTY2OC4zMy4xLjE2ODU4MDk3MjAuMC4wLjA."
+              src={localStorage.getItem("images")}
             />
           </IconButton>
         </Tooltip>
@@ -80,27 +90,32 @@ export default function AccountMenu() {
           <Avatar
             sx={{ width: 32, height: 32 }}
             alt="Remy Sharp"
-            src="https://firebasestorage.googleapis.com/v0/b/lab-film-fer201m.appspot.com/o/AVT%2Fb0da176dc52a14744d3b.jpg?alt=media&token=011e4af2-e869-4aa8-9b26-7ba848ee93d8&_gl=1*o4igok*_ga*MTU1OTk0NzM3OC4xNjgzNTA1MDE2*_ga_CW55HF8NVT*MTY4NTgwOTY2OC4zMy4xLjE2ODU4MDk3MjAuMC4wLjA."
+            src={localStorage.getItem("images")}
           />{" "}
-          Thông tin tài khoản
+          {localStorage.getItem("name")}
         </MenuItem>
         {/* <MenuItem onClick={handleClose}>
           <Avatar /> Tài khoản của tôi
         </MenuItem> */}
         <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Thêm tài khoản
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Cài đặt
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <Link to="/admin">
+          <MenuItem sx={{ color: "#333" }}>
+            <ListItemIcon>
+              <DashboardIcon fontSize="small" />
+            </ListItemIcon>
+            Dashboard
+          </MenuItem>
+        </Link>
+
+        <Link to="/film/homePage">
+          <MenuItem sx={{ color: "#333" }}>
+            <ListItemIcon>
+              <HomeIcon fontSize="small" />
+            </ListItemIcon>
+            Trang chủ
+          </MenuItem>
+        </Link>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

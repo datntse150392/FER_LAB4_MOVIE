@@ -92,7 +92,6 @@
 }
 
 .motion-background {
-  overflow: hidden;
   height: 100%;
   z-index: 0;
 }
@@ -115,7 +114,7 @@
 }
 .info-container {
   width: 40%;
-  top: 30%;
+  top: 20%;
   margin-bottom: 1.2vw;
   min-height: 13.2vw;
   position: absolute;
@@ -140,12 +139,10 @@
 }
 .login-btn {
   border: none;
-  width: 158px;
-  height: 48px;
+  width: 100px;
+  height: 32px;
   border-radius: 5px;
-  background-color: #33333300;
-  border-color: #cccccc;
-  border-style: solid;
+  background: rgb(225, 9, 9);
   color: #fff;
   font-size: 14px;
   font-weight: bold;
@@ -161,9 +158,8 @@
 
 .slider-content {
   position: absolute;
-  top: 80.5%;
+  top: 15%;
   width: 100%;
-  padding-left: 30px;
 }
 
 .news {
@@ -180,10 +176,11 @@
 .container-news-title {
   color: #e5e5e5;
   overflow-y: hidden;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 18px;
   font-weight: 500;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-left: 5px;
   cursor: pointer;
 }
 

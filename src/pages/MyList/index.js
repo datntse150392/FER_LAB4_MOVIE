@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useParams } from "react-router-dom";
-import styles from "./HomePage.module.css";
+import styles from "./MyList.module.css";
 import ModalUI from "./component/Modal";
 
 const style = {
@@ -22,10 +22,12 @@ const style = {
   // minWidth: "90%",
 };
 
-export default function HomePage() {
+export default function MyList() {
   const [listFilm_Honor, setListFilm_Honor] = useState();
-  const [listFilm_Ainime, setListFilm_Ainime] = useState();
-  const [listFilm_Trending, setListFilm_Trending] = useState();
+  const [listFilm_myList, setListFilm_myList] = useState();
+  const [listFilm_myList_2, setListFilm_myList_2] = useState();
+  const [listFilm_myList_3, setListFilm_myList_3] = useState();
+
   const [film_detail, setFilm_detail] = useState();
   const [data, setData] = useState();
   const [test, setTest] = useState();
@@ -52,9 +54,13 @@ export default function HomePage() {
         // handle error
       });
   };
-  const getListFilm_Billboard = () => {
+  // Lọc ra những bộ phim mới và Trending page 1 list 6
+  const getListFilm_myList = () => {
     const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("billboard", true);
+    url.searchParams.append("myList", true);
+    url.searchParams.append("isActive", true);
+    url.searchParams.append("page", 1);
+    url.searchParams.append("limit", 6);
     fetch(url, {
       method: "GET",
       headers: { "content-type": "application/json" },
@@ -67,16 +73,19 @@ export default function HomePage() {
       })
       .then((tasks) => {
         // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setTest(tasks);
+        setListFilm_myList(tasks);
       })
       .catch((error) => {
         // handle error
       });
   };
-  // Lọc ra những bộ phim kinh dị
-  const getListFilm_Horror = () => {
+  // Lọc ra những bộ phim mới và Trending page 2 list 6
+  const getListFilm_myList_2 = () => {
     const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("type", "Phim kinh dị");
+    url.searchParams.append("myList", true);
+    url.searchParams.append("isActive", true);
+    url.searchParams.append("page", 2);
+    url.searchParams.append("limit", 6);
     fetch(url, {
       method: "GET",
       headers: { "content-type": "application/json" },
@@ -89,16 +98,19 @@ export default function HomePage() {
       })
       .then((tasks) => {
         // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setListFilm_Honor(tasks);
+        setListFilm_myList_2(tasks);
       })
       .catch((error) => {
         // handle error
       });
   };
-  // Lọc ra những bộ phim Anime
-  const getListFilm_Anime = () => {
+  // Lọc ra những bộ phim mới và Trending page 2 list 6
+  const getListFilm_myList_3 = () => {
     const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("type", "Phim Anime");
+    url.searchParams.append("myList", true);
+    url.searchParams.append("isActive", true);
+    url.searchParams.append("page", 3);
+    url.searchParams.append("limit", 6);
     fetch(url, {
       method: "GET",
       headers: { "content-type": "application/json" },
@@ -111,29 +123,7 @@ export default function HomePage() {
       })
       .then((tasks) => {
         // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setListFilm_Ainime(tasks);
-      })
-      .catch((error) => {
-        // handle error
-      });
-  };
-  // Lọc ra những bộ phim mới và Trending
-  const getListFilm_Trending = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("state", "Trending");
-    fetch(url, {
-      method: "GET",
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        // handle error
-      })
-      .then((tasks) => {
-        // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setListFilm_Trending(tasks);
+        setListFilm_myList_3(tasks);
       })
       .catch((error) => {
         // handle error
@@ -144,10 +134,9 @@ export default function HomePage() {
 
   useEffect(() => {
     getFilms();
-    getListFilm_Billboard();
-    getListFilm_Horror();
-    getListFilm_Anime();
-    getListFilm_Trending();
+    getListFilm_myList_2();
+    getListFilm_myList();
+    getListFilm_myList_3();
   }, []);
 
   const [open, setOpen] = React.useState(false);
@@ -209,115 +198,57 @@ export default function HomePage() {
         />
       )}
       {/* MADAL */}
-
-      {/* SHOW BILLBOARD  */}
-      {test && (
-        <div className={styles["billboard-motion"]}>
-          <div className={styles["motion-background"]}>
-            {/* <img src={test[0]?.imgBG} /> */}
-            <video
-              src={test[0]?.imgBG}
-              style={{ height: "100%", overflow: "hidden" }}
-              controls
-              autoPlay
-              loop
-            />
-          </div>
-          <div className={styles["info-container"]}>
-            <div className={styles["billboard-title"]}>
-              <img
-                alt=""
-                className={styles["title-logo"]}
-                src={test[0]?.imgLogo}
-                title="Xác ướp"
-              />
-            </div>
-            <div className={styles["info-wrapper"]}>
-              <p>{test[0]?.description}</p>
-            </div>
-            <div className={styles["action"]}>
-              <Link to={`/film/homePage/${test[0]?.id}`}>
-                <button
-                  onClick={() => setOpen(true)}
-                  className={styles["login-btn"]}
-                >
-                  Xem chi tiết
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* SHOW BILLBOARD */}
       <div className={styles["slider-content"]}>
-        {/* Tổng hợp tất cả bộ phim thịnh hành*/}
+        {/* Tổng hợp tất cả bộ phim yêu thích*/}
         <h2
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          Hiện đang thịnh hành
+          Danh sách yêu thích
         </h2>
         <Slider
           {...settings}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {listFilm_Trending?.map((film, index) => (
+          {listFilm_myList?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/homePage/${film.id}`}>
+                <Link to={`/film/myList/${film.id}`}>
                   <img src={film.img} alt={film.title} onClick={handleOpen} />
                 </Link>
               </div>
             </div>
           ))}
         </Slider>
-        {/* Tổng hợp tất cả bộ phim thịnh hành */}
-
-        {/* Tổng hợp tất cả bộ phim kinh dị */}
-        <h2
-          style={{ color: "white" }}
-          className={styles["container-news-title"]}
-        >
-          Phim Kinh Dị phổ biến trên Netflix
-        </h2>
         <Slider
           {...settings}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {listFilm_Honor?.map((film, index) => (
+          {listFilm_myList_2?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/homePage/${film.id}`}>
+                <Link to={`/film/myList/${film.id}`}>
                   <img src={film.img} alt={film.title} onClick={handleOpen} />
                 </Link>
               </div>
             </div>
           ))}
         </Slider>
-        {/*  Tổng hợp tất cả bộ phim kinh dị */}
-
-        {/* Tổng hợp tất cả bộ phim Anime*/}
-        <h2
-          style={{ color: "white" }}
-          className={styles["container-news-title"]}
-        >
-          Phim Anime
-        </h2>
         <Slider
           {...settings}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {listFilm_Ainime?.map((film, index) => (
+          {listFilm_myList_3?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/homePage/${film.id}`}>
+                <Link to={`/film/myList/${film.id}`}>
                   <img src={film.img} alt={film.title} onClick={handleOpen} />
                 </Link>
               </div>
             </div>
           ))}
         </Slider>
-        {/* Tổng hợp tất cả bộ phim Anime */}
+        {/* Tổng hợp tất cả bộ phim yêu thích */}
       </div>
     </div>
   );

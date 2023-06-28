@@ -1,0 +1,90 @@
+header {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.title {
+  color: #fff;
+  font-size: 30px;
+}
+
+.films {
+  margin-top: 20px;
+  border-collapse: collapse;
+  overscroll-behavior-y: inherit;
+}
+
+.films td,
+.films th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 12px;
+}
+
+.films td img {
+  width: 100px;
+}
+
+.films tr {
+  background-color: #f2f2f2;
+}
+
+.films tr:hover {
+  background-color: #999898f4;
+}
+
+.films th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 16px;
+  text-align: left;
+  background-color: #04aa6d;
+  color: rgb(10, 0, 0);
+}
+
+.input-form {
+  width: 200px;
+  height: 30px;
+  margin: 0px 10px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 5px;
+}
+
+.btn {
+  height: 30px;
+  width: 120px;
+  border-radius: 5px;
+  background-color: red;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-delete {
+  height: 30px;
+  width: 70px;
+  border-radius: 5px;
+  background-color: red;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-update {
+  margin-left: 10px;
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  background-color: rgb(8, 237, 27);
+  color: #110101;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}

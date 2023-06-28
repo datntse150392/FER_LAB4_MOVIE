@@ -14,13 +14,18 @@ export default function HeaderForFilmLayout() {
       </div>
       <ul className={styles["nav"]}>
         <li style={{ fontWeight: "bold" }}>
-          <Link to="/film/homePage">Mới & Phổ biến</Link>
+          <Link to="/film/homePage">Trang chủ</Link>
         </li>
-        {/* <li style={{ fontWeight: "" }}>
-          <Link to="/film/newFilm">Danh sách Phim của bạn</Link>
-        </li> */}
+        <li style={{ fontWeight: "bold" }}>
+          <Link to="/film/series">Phim T.hình</Link>
+        </li>
+        {localStorage.getItem("accessToken") === "true" && (
+          <li style={{ fontWeight: "bold" }}>
+            <Link to="/film/myList">Danh sách phim của tôi</Link>
+          </li>
+        )}
       </ul>
-      <AccountMenu />
+      {localStorage.getItem("accessToken") === "true" && <AccountMenu />}
     </div>
   );
 }

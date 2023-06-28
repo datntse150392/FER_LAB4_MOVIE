@@ -11,11 +11,14 @@ export default function Header() {
         </Link>
       </div>
       <div className={styles["header-action"]}>
+        {!localStorage.getItem("accessToken") && (
+          <Link to="/login">
+            <button className={styles["header-login-btn"]}>Đăng nhập</button>
+          </Link>
+        )}
+
         <Link to="/contact">
           <button className={styles["header-contact-btn"]}>Liên hệ</button>
-        </Link>
-        <Link to="/login">
-          <button className={styles["header-login-btn"]}>Đăng nhập</button>
         </Link>
       </div>
     </div>

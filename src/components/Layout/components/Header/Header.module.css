@@ -49,7 +49,7 @@
 
   .header-login-btn {
     border: none;
-    width: 80px;
+    width: 70px;
     height: 32px;
     border-radius: 5px;
     background: rgb(225, 9, 9);
@@ -57,5 +57,19 @@
     font-size: 10px;
     font-weight: bold;
     cursor: pointer;
+  }
+
+  .header-contact-btn {
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    width: 60px;
+    height: 32px;
+    border-radius: 5px;
+    background: rgba(79, 78, 78, 0.101);
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0px 10px;
   }
 }

@@ -22,6 +22,9 @@ export default function HeaderForFilmLayout() {
         <li style={{ fontWeight: "bold" }}>
           <Link to="/film/kid">Phim Thiếu Nhi</Link>
         </li>
+        <li style={{ fontWeight: "bold" }}>
+          <Link to="/film/tvShow">TV Show</Link>
+        </li>
         {localStorage.getItem("accessToken") === "true" && (
           <li style={{ fontWeight: "bold" }}>
             <Link to="/film/myList">Danh sách phim của tôi</Link>

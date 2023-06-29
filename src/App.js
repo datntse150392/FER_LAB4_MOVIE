@@ -16,6 +16,7 @@ import UpdateFilm from "./pages/UpdateFilm";
 import SerisFilm from "./pages/SerisFilm";
 import MyList from "./pages/MyList";
 import KidFilm from "./pages/KidFilm";
+import TVShow from "./pages/TVShow";
 function App() {
   return (
     <div className="App">
@@ -172,6 +173,24 @@ function App() {
           }
         />
         {/* ROUTE PHIM Dành Cho Trẻ EM */}
+        {/* ROUTE TVSHOW */}
+        <Route
+          path="/film/tvShow"
+          element={
+            <FilmLayout>
+              <TVShow />
+            </FilmLayout>
+          }
+        />
+        <Route
+          path="/film/tvShow/:id"
+          element={
+            <FilmLayout>
+              <TVShow />
+            </FilmLayout>
+          }
+        />
+        {/* ROUTE TVSHOW */}
 
         {/* {publicRoutes.map((route, index) => {
           let Layout = DefaultLayout;

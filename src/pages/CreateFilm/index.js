@@ -121,6 +121,8 @@ export default function CreateFilm() {
                       <MenuItem value={"Disney"}>Phim Disney</MenuItem>
                       <MenuItem value={"China"}>Phim Trung Quốc</MenuItem>
                       <MenuItem value={"USUK"}>Phim Âu Mỹ</MenuItem>
+                      <MenuItem value={"TVShow"}>TV Show</MenuItem>
+                      <MenuItem value={"THTT"}>Truyền hình thực tế</MenuItem>
                     </Select>
                     <FormHelperText>Mời bạn chọn thể loại phim</FormHelperText>
                   </FormControl>

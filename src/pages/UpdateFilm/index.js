@@ -127,6 +127,8 @@ export default function UpdateFilm() {
                       </option>
                       <option value={"China"}>Phim Trung Quốc</option>
                       <option value={"USUK"}>Phim Âu Mỹ</option>
+                      <option value={"TVShow"}>TV Show</option>
+                      <option value={"THTT"}>Truyền hình thực tế</option>
                     </NativeSelect>
                     <FormHelperText>Mời bạn chọn thể loại phim</FormHelperText>
                   </FormControl>

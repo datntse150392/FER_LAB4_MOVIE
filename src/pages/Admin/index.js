@@ -24,6 +24,8 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 // Pagination
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 export default function Admin() {
   const [open, setOpen] = React.useState(false);

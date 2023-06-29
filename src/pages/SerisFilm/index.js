@@ -3,36 +3,32 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useParams } from "react-router-dom";
-import { Films } from "../../assets/Datas/data";
 import styles from "./SerisFilm.module.css";
 import ModalUI from "./component/Modal";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "70%",
-  bgcolor: "background.paper",
-  borderradius: "20px",
-  boxShadow: 24,
-  p: 4,
-  backgroundColor: "#0000009d",
-  padding: "0px",
-  borderRadius: "15px",
-  // minWidth: "90%",
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: "70%",
+//   bgcolor: "background.paper",
+//   borderradius: "20px",
+//   boxShadow: 24,
+//   p: 4,
+//   backgroundColor: "#0000009d",
+//   padding: "0px",
+//   borderRadius: "15px",
+//   // minWidth: "90%",
+// };
 
 export default function SerisFilm() {
-  // transfrom billboard
-  const [transformID, setTranformID] = useState(1);
-
   // API FUNCTION
   const [data, setData] = useState();
   const [test, setTest] = useState();
-  const [listFilm_Korea, setlistFilm_Korea] = useState();
-  const [listFilm_China, setlistFilm_China] = useState();
-  const [listFilm_USUK, setlistFilm_USUK] = useState();
+  // const [listFilm_Korea, setlistFilm_Korea] = useState();
+  // const [listFilm_China, setlistFilm_China] = useState();
+  // const [listFilm_USUK, setlistFilm_USUK] = useState();
 
   // Lọc tất cả các phim có isActive
   const getFilms = () => {
@@ -49,7 +45,6 @@ export default function SerisFilm() {
         // handle error
       })
       .then((tasks) => {
-        // mockapi returns only tasks that match `Phim Hàn Quốc` string
         setData(tasks);
       })
       .catch((error) => {
@@ -58,76 +53,76 @@ export default function SerisFilm() {
   };
 
   // Lấy danh sách Phim Hàn Quốc
-  const getListFilm_Korea = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("type", "Phim Hàn Quốc");
-    url.searchParams.append("isActive", true);
-    fetch(url, {
-      method: "GET",
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        // handle error
-      })
-      .then((tasks) => {
-        // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setlistFilm_Korea(tasks);
-      })
-      .catch((error) => {
-        // handle error
-      });
-  };
+  // const getListFilm_Korea = () => {
+  //   const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
+  //   url.searchParams.append("type", "Korean");
+  //   url.searchParams.append("isActive", true);
+  //   fetch(url, {
+  //     method: "GET",
+  //     headers: { "content-type": "application/json" },
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
+  //       // handle error
+  //     })
+  //     .then((tasks) => {
+  //       // mockapi returns only tasks that match `Phim Hàn Quốc` string
+  //       setlistFilm_Korea(tasks);
+  //     })
+  //     .catch((error) => {
+  //       // handle error
+  //     });
+  // };
 
   // Lấy danh sách Phim Tung Quốc
-  const getListFilm_China = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("type", "Phim Trung Quốc");
-    url.searchParams.append("isActive", true);
-    fetch(url, {
-      method: "GET",
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        // handle error
-      })
-      .then((tasks) => {
-        // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setlistFilm_China(tasks);
-      })
-      .catch((error) => {
-        // handle error
-      });
-  };
+  // const getListFilm_China = () => {
+  //   const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
+  //   url.searchParams.append("type", "China");
+  //   url.searchParams.append("isActive", true);
+  //   fetch(url, {
+  //     method: "GET",
+  //     headers: { "content-type": "application/json" },
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
+  //       // handle error
+  //     })
+  //     .then((tasks) => {
+  //       // mockapi returns only tasks that match `Phim Hàn Quốc` string
+  //       setlistFilm_China(tasks);
+  //     })
+  //     .catch((error) => {
+  //       // handle error
+  //     });
+  // };
 
   // Lấy danh sách Phim Âu Mỹ
-  const getListFilm_USUK = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("type", "Phim Âu Mỹ");
-    url.searchParams.append("isActive", true);
-    fetch(url, {
-      method: "GET",
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        // handle error
-      })
-      .then((tasks) => {
-        // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setlistFilm_USUK(tasks);
-      })
-      .catch((error) => {
-        // handle error
-      });
-  };
+  // const getListFilm_USUK = () => {
+  //   const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
+  //   url.searchParams.append("type", "USUK");
+  //   url.searchParams.append("isActive", true);
+  //   fetch(url, {
+  //     method: "GET",
+  //     headers: { "content-type": "application/json" },
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
+  //       // handle error
+  //     })
+  //     .then((tasks) => {
+  //       // mockapi returns only tasks that match `Phim Hàn Quốc` string
+  //       setlistFilm_USUK(tasks);
+  //     })
+  //     .catch((error) => {
+  //       // handle error
+  //     });
+  // };
 
   const getListFilm_Billboard = () => {
     const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
@@ -153,23 +148,11 @@ export default function SerisFilm() {
 
   useEffect(() => {
     getFilms();
-    getListFilm_Korea();
-    getListFilm_China();
-    getListFilm_USUK();
+    // getListFilm_Korea();
+    // getListFilm_China();
+    // getListFilm_USUK();
     getListFilm_Billboard();
   }, []);
-
-  // Lấy tất cả danh sách muốn show billBoard theo type billboard
-  const listFilm_BillBoard = Films.filter((film, index) => {
-    return film.billboard === true;
-  });
-
-  useEffect(() => {
-    // Hiện tại thì chuyển billboard có thể đang phải gặp bug => sau khi hoàn thiện hết tính năng quay lại kiểm tra
-    setTimeout(() => {
-      setTranformID(Math.floor(Math.random() * listFilm_BillBoard.length));
-    }, 10000);
-  }, [transformID]);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -178,11 +161,28 @@ export default function SerisFilm() {
   //----------------------------------------------------------------//
   const filmId = useParams();
   const Film_detail = data?.find((obj) => {
-    return obj.id == filmId.id;
+    return obj.id === filmId.id;
   });
-  const convertURL = (url) => {
-    return url?.replace("watch?v=", "embed/");
-  };
+
+  // Lấy ra danh sách PHIM HÀN QUỐC đang Acitve
+  const listFilm_Korea = data?.filter((obj) => {
+    return obj.type === "Korean";
+  });
+
+  // Lấy ra danh sách PHIM TRUNG QUỐC đang Active
+  const listFilm_China = data?.filter((obj) => {
+    return obj.type === "China";
+  });
+
+  // Lấy ra danh sách PHIM ÂU MỸ đang Active
+  const listFilm_USUK = data?.filter((obj) => {
+    return obj.type === "USUK";
+  });
+
+  // Lây ra danh sách Phim Trung Quốc, Hàn Quốc, Âu Mỹ có quảng cáo
+  const lsitFilm_Billboard_Seris = test?.filter((obj) => {
+    return obj.type === "USUK" || obj.type === "Korean" || obj.type === "China";
+  });
 
   // Sẽ phải tách ra thành 1 component riêng và gắn vào như component AVT "MUI MODAL"
   const settings = {
@@ -219,6 +219,41 @@ export default function SerisFilm() {
       },
     ],
   };
+  // Sẽ phải tách ra thành 1 component riêng và gắn vào như component AVT "MUI MODAL"
+  const settings1 = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 380,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <div className={styles["container-homepage"]}>
@@ -231,44 +266,50 @@ export default function SerisFilm() {
         />
       )}
       {/* MADAL */}
-
       {/* SHOW BILLBOARD  */}
       {test && (
-        <div className={styles["billboard-motion"]}>
-          <div className={styles["motion-background"]}>
-            {/* <img src={test[0]?.imgBG} /> */}
-            <video
-              src={test[0]?.imgBG}
-              style={{ height: "100%", overflow: "hidden" }}
-              controls
-              autoPlay
-              loop
-            />
-          </div>
-          <div className={styles["info-container"]}>
-            <div className={styles["billboard-title"]}>
-              <img
-                alt=""
-                className={styles["title-logo"]}
-                src={test[0]?.imgLogo}
-                title="Xác ướp"
-              />
+        <Slider
+          {...settings1}
+          style={{ overflowY: "hidden", marginBottom: "20px" }}
+        >
+          {lsitFilm_Billboard_Seris?.map((test, index) => (
+            <div className={styles["billboard-motion"]}>
+              <div className={styles["motion-background"]}>
+                {/* <img src={test[0]?.imgBG} /> */}
+                <video
+                  src={test?.imgBG}
+                  style={{ height: "100%", width: "100%", overflow: "hidden" }}
+                  autoPlay
+                  muted
+                  loop
+                />
+              </div>
+              <div className={styles["info-container"]}>
+                <div className={styles["billboard-title"]}>
+                  <img
+                    alt=""
+                    className={styles["title-logo"]}
+                    src={test?.imgLogo}
+                    title={test?.title}
+                  />
+                </div>
+                <div className={styles["info-wrapper"]}>
+                  <p>{test?.description}</p>
+                </div>
+                <div className={styles["action"]}>
+                  <Link to={`/film/homePage/${test?.id}`}>
+                    <button
+                      onClick={() => setOpen(true)}
+                      className={styles["login-btn"]}
+                    >
+                      Xem chi tiết
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </div>
-            <div className={styles["info-wrapper"]}>
-              <p>{test[0]?.description}</p>
-            </div>
-            <div className={styles["action"]}>
-              <Link to={`/film/series/${test[0]?.id}`}>
-                <button
-                  onClick={() => setOpen(true)}
-                  className={styles["login-btn"]}
-                >
-                  Xem chi tiết
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
+          ))}
+        </Slider>
       )}
       {/* SHOW BILLBOARD */}
       <div className={styles["slider-content"]}>
@@ -277,7 +318,7 @@ export default function SerisFilm() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          Phim hài truyền hình lãng mạn Hàn Quốc
+          PHIM HÀI TRUYỀN HÌNH LÃNG MẠN HÀN QUỐC
         </h2>
         <Slider
           {...settings}
@@ -301,7 +342,7 @@ export default function SerisFilm() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          Chương trình truyền hình Trung Quốc
+          CHƯƠNG TRÌNH TRUYỀN HÌNH TRUNG QUỐC
         </h2>
         <Slider
           {...settings}
@@ -325,7 +366,7 @@ export default function SerisFilm() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          Chương trình truyền hình Âu Mỹ
+          CHƯƠNG TRÌNH TRUYỀN HINH ÂU MỸ
         </h2>
         <Slider
           {...settings}

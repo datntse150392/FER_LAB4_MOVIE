@@ -118,14 +118,15 @@ export default function UpdateFilm() {
                         }))
                       }
                     >
-                      <option value={"Phim kinh dị"}>Phim kinh dị</option>
-                      <option value={"Phim Hàn Quốc"}>Phim Hàn Quốc</option>
-                      <option value={"Phim Anime"}>Phim Anime</option>
-                      <option value={"Phim hành động & phiêu lưu"}>
+                      <option value={"Horror"}>Phim kinh dị</option>
+                      <option value={"Korean"}>Phim Hàn Quốc</option>
+                      <option value={"Anime"}>Phim Anime</option>
+                      <option value={"Disney"}>Phim Disney</option>
+                      <option value={"Action"}>
                         Phim hành động & phiêu lưu
                       </option>
-                      <option value={"Phim Trung Quốc"}>Phim Trung Quốc</option>
-                      <option value={"Phim Âu Mỹ"}>Phim Âu Mỹ</option>
+                      <option value={"China"}>Phim Trung Quốc</option>
+                      <option value={"USUK"}>Phim Âu Mỹ</option>
                     </NativeSelect>
                     <FormHelperText>Mời bạn chọn thể loại phim</FormHelperText>
                   </FormControl>

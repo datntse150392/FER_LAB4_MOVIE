@@ -15,6 +15,7 @@ import CreateFilm from "./pages/CreateFilm";
 import UpdateFilm from "./pages/UpdateFilm";
 import SerisFilm from "./pages/SerisFilm";
 import MyList from "./pages/MyList";
+import KidFilm from "./pages/KidFilm";
 function App() {
   return (
     <div className="App">
@@ -152,6 +153,26 @@ function App() {
             </FilmLayout>
           }
         />
+        {/* ROUTE PHIM TRUYỀN HÌNH */}
+        {/* ROUTE PHIM Dành Cho Trẻ EM */}
+        <Route
+          path="/film/kid"
+          element={
+            <FilmLayout>
+              <KidFilm />
+            </FilmLayout>
+          }
+        />
+        <Route
+          path="/film/kid/:id"
+          element={
+            <FilmLayout>
+              <KidFilm />
+            </FilmLayout>
+          }
+        />
+        {/* ROUTE PHIM Dành Cho Trẻ EM */}
+
         {/* {publicRoutes.map((route, index) => {
           let Layout = DefaultLayout;
           console.log(route.layout);

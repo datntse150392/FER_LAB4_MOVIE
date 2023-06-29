@@ -23,6 +23,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
+// Pagination
+
 export default function Admin() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState();

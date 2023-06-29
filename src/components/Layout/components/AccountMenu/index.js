@@ -28,6 +28,8 @@ export default function AccountMenu() {
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("name");
+    localStorage.removeItem("email");
+    localStorage.removeItem("images");
     navigate("/login");
     window.location.reload();
   };
@@ -98,14 +100,16 @@ export default function AccountMenu() {
           <Avatar /> Tài khoản của tôi
         </MenuItem> */}
         <Divider />
-        <Link to="/admin">
-          <MenuItem sx={{ color: "#333" }}>
-            <ListItemIcon>
-              <DashboardIcon fontSize="small" />
-            </ListItemIcon>
-            Dashboard
-          </MenuItem>
-        </Link>
+        {localStorage.getItem("email") == "datntse150392@fpt.edu.vn" && (
+          <Link to="/admin">
+            <MenuItem sx={{ color: "#333" }}>
+              <ListItemIcon>
+                <DashboardIcon fontSize="small" />
+              </ListItemIcon>
+              Dashboard
+            </MenuItem>
+          </Link>
+        )}
 
         <Link to="/film/homePage">
           <MenuItem sx={{ color: "#333" }}>

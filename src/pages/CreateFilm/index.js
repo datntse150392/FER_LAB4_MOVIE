@@ -114,13 +114,13 @@ export default function CreateFilm() {
                       inputProps={{ "aria-label": "Without label" }}
                       sx={{ height: "30px", width: "100%", overflow: "hidden" }}
                     >
-                      <MenuItem value={"Phim kinh dị"}>Phim kinh dị</MenuItem>
-                      <MenuItem value={"Phim Hàn Quốc"}>Phim Hàn Quốc</MenuItem>
-                      <MenuItem value={"Phim Anime"}>Phim Anime</MenuItem>
-                      <MenuItem value={"Phim Trung Quốc"}>
-                        Phim Trung Quốc
-                      </MenuItem>
-                      <MenuItem value={"Phim Âu Mỹ"}>Phim Âu Mỹ</MenuItem>
+                      <MenuItem value={"Horror"}>Phim kinh dị</MenuItem>
+                      <MenuItem value={"Korean"}>Phim Hàn Quốc</MenuItem>
+                      <MenuItem value={"Action"}>Phim hành động</MenuItem>
+                      <MenuItem value={"Anime"}>Phim Anime</MenuItem>
+                      <MenuItem value={"Disney"}>Phim Disney</MenuItem>
+                      <MenuItem value={"China"}>Phim Trung Quốc</MenuItem>
+                      <MenuItem value={"USUK"}>Phim Âu Mỹ</MenuItem>
                     </Select>
                     <FormHelperText>Mời bạn chọn thể loại phim</FormHelperText>
                   </FormControl>
@@ -157,7 +157,6 @@ export default function CreateFilm() {
                     id="filled-basic"
                     label="Tác giả"
                     variant="filled"
-                    required
                   />
                 </Item>
               </Box>

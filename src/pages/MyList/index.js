@@ -6,31 +6,28 @@ import { Link, useParams } from "react-router-dom";
 import styles from "./MyList.module.css";
 import ModalUI from "./component/Modal";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "70%",
-  bgcolor: "background.paper",
-  borderradius: "20px",
-  boxShadow: 24,
-  p: 4,
-  backgroundColor: "#0000009d",
-  padding: "0px",
-  borderRadius: "15px",
-  // minWidth: "90%",
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: "70%",
+//   bgcolor: "background.paper",
+//   borderradius: "20px",
+//   boxShadow: 24,
+//   p: 4,
+//   backgroundColor: "#0000009d",
+//   padding: "0px",
+//   borderRadius: "15px",
+//   // minWidth: "90%",
+// };
 
 export default function MyList() {
-  const [listFilm_Honor, setListFilm_Honor] = useState();
   const [listFilm_myList, setListFilm_myList] = useState();
   const [listFilm_myList_2, setListFilm_myList_2] = useState();
   const [listFilm_myList_3, setListFilm_myList_3] = useState();
 
-  const [film_detail, setFilm_detail] = useState();
   const [data, setData] = useState();
-  const [test, setTest] = useState();
 
   // Lọc tất cả các phim có isActive
   const getFilms = () => {
@@ -145,11 +142,10 @@ export default function MyList() {
 
   //----------------------------------------------------------------//
   const Film_detail = data?.find((obj) => {
-    return obj.id == filmId.id;
+    return obj.id === filmId.id;
   });
-  const convertURL = (url) => {
-    return url?.replace("watch?v=", "embed/");
-  };
+
+  //
 
   // Sẽ phải tách ra thành 1 component riêng và gắn vào như component AVT "MUI MODAL"
   const settings = {

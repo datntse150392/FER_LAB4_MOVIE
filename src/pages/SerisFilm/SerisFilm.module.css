@@ -114,20 +114,29 @@
   object-fit: fill;
 }
 .info-container {
-  width: 40%;
-  top: 30%;
+  width: 100%;
+  top: 27%;
   margin-bottom: 1.2vw;
   min-height: 13.2vw;
   position: absolute;
-  margin-left: 10%;
+  margin-left: 100px;
 }
 .billboard-title img {
-  width: 100%;
+  width: 500px;
+  height: 180px;
 }
+
+.info-wrapper {
+  overflow: hidden;
+  width: 620px;
+  height: 44px;
+  margin-bottom: 10px;
+}
+
 .info-wrapper p {
   color: #fff;
   font-size: 16px;
-  font-weight: 200;
+  font-weight: bold;
   line-height: normal;
   margin-top: 0.1vw;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);

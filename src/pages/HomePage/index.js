@@ -163,7 +163,9 @@ export default function HomePage() {
       obj.type !== "Anime" &&
       obj.type !== "Korean" &&
       obj.type !== "China" &&
-      obj.type !== "Disney"
+      obj.type !== "Disney" &&
+      obj.type !== "THTT" &&
+      obj.type !== "TVShow"
     );
   });
 

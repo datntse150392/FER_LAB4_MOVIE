@@ -90,7 +90,7 @@ export default function Login() {
         </div>
         <div className={styles["login-content-bottom"]}>
           <div className={styles["login-signup-now"]}>
-            Bạn mới tham gia Netflix?
+            Bạn mới tham gia NTDMovie?
             <a href="#">Đăng kí ngay</a>
           </div>
           <div className={styles["recaptcha-terms-of-use"]}>

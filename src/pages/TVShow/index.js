@@ -324,7 +324,7 @@ export default function TVShow() {
           {listFilm_RapViet_Full?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/kid/${film.id}`}>
+                <Link to={`/film/tvShow/${film.id}`}>
                   <img src={film.img} alt={film.title} onClick={handleOpen} />
                   <img src={film.img} alt={film.title} onClick={handleOpen} />
                 </Link>
@@ -347,7 +347,7 @@ export default function TVShow() {
           {List_Film_TVShow?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/kid/${film.id}`}>
+                <Link to={`/film/tvShow/${film.id}`}>
                   <img src={film.img} alt={film.title} onClick={handleOpen} />
                   <img src={film.img} alt={film.title} onClick={handleOpen} />
                 </Link>

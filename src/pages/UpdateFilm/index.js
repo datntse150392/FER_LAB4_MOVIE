@@ -33,6 +33,7 @@ export default function UpdateFilm() {
   const navigate = useNavigate();
 
   const [filmDetail, setFilmDetail] = useState();
+
   // Get Params
   const FilmID = useParams();
   async function getFilmByID(id) {

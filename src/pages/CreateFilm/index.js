@@ -6,7 +6,6 @@ import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 
 // SELECT MUI
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
@@ -116,7 +115,9 @@ export default function CreateFilm() {
                     >
                       <MenuItem value={"Horror"}>Phim kinh dị</MenuItem>
                       <MenuItem value={"Korean"}>Phim Hàn Quốc</MenuItem>
-                      <MenuItem value={"Action"}>Phim hành động</MenuItem>
+                      <MenuItem value={"Action"}>
+                        Phim hành động & phiêu lưu
+                      </MenuItem>
                       <MenuItem value={"Anime"}>Phim Anime</MenuItem>
                       <MenuItem value={"Disney"}>Phim Disney</MenuItem>
                       <MenuItem value={"China"}>Phim Trung Quốc</MenuItem>

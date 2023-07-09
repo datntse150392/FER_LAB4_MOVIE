@@ -266,18 +266,26 @@ export default function TVShow() {
                     title={test?.title}
                   />
                 </div>
-                <div className={styles["info-wrapper"]}>
-                  <p>{test?.description}</p>
-                </div>
                 <div className={styles["action"]}>
-                  <Link to={`/film/tvShow/${test?.id}`}>
+                  <Link to={`/film/homePage/${test?.id}`}>
                     <button
+                      // throw new TypeError("Cannot find id of film");
                       onClick={() => setOpen(true)}
-                      className={styles["login-btn"]}
+                      className={styles["register-btn"]}
+                    >
+                      Đăng kí gói / Thuê phim
+                    </button>
+                    <button
+                      // throw new TypeError("Cannot find id of film");
+                      onClick={() => setOpen(true)}
+                      className={styles["detail-btn"]}
                     >
                       Xem chi tiết
                     </button>
                   </Link>
+                </div>
+                <div className={styles["info-wrapper"]}>
+                  <p>{test?.description}</p>
                 </div>
               </div>
             </div>
@@ -291,7 +299,7 @@ export default function TVShow() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          TV SHOW THỊNH HÀNH
+          Danh Sách TV Show Hiện Đang Thịnh Hành
         </h2>
         <Slider
           {...settings}
@@ -315,7 +323,7 @@ export default function TVShow() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          TRỌN BỘ RAP VIỆT MÙA 3
+          Trọn Bộ Rap Việt Mùa 3
         </h2>
         <Slider
           {...settings}
@@ -338,7 +346,7 @@ export default function TVShow() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          TRUYỀN HÌNH THỰC TẾ
+          Truyền Hình Thực Tế
         </h2>
         <Slider
           {...settings}

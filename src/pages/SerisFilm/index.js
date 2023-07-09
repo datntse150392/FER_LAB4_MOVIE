@@ -293,18 +293,26 @@ export default function SerisFilm() {
                     title={test?.title}
                   />
                 </div>
-                <div className={styles["info-wrapper"]}>
-                  <p>{test?.description}</p>
-                </div>
                 <div className={styles["action"]}>
                   <Link to={`/film/homePage/${test?.id}`}>
                     <button
+                      // throw new TypeError("Cannot find id of film");
                       onClick={() => setOpen(true)}
-                      className={styles["login-btn"]}
+                      className={styles["register-btn"]}
+                    >
+                      Đăng kí gói / Thuê phim
+                    </button>
+                    <button
+                      // throw new TypeError("Cannot find id of film");
+                      onClick={() => setOpen(true)}
+                      className={styles["detail-btn"]}
                     >
                       Xem chi tiết
                     </button>
                   </Link>
+                </div>
+                <div className={styles["info-wrapper"]}>
+                  <p>{test?.description}</p>
                 </div>
               </div>
             </div>
@@ -318,7 +326,7 @@ export default function SerisFilm() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          PHIM HÀI TRUYỀN HÌNH LÃNG MẠN HÀN QUỐC
+          Phim Truyền Hình Lãng Mạn Hàn Quốc
         </h2>
         <Slider
           {...settings}
@@ -342,7 +350,7 @@ export default function SerisFilm() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          CHƯƠNG TRÌNH TRUYỀN HÌNH TRUNG QUỐC
+          Chương Trình Truyền Hình Hàn Quốc
         </h2>
         <Slider
           {...settings}
@@ -366,7 +374,7 @@ export default function SerisFilm() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          CHƯƠNG TRÌNH TRUYỀN HINH ÂU MỸ
+          Chương Trình Truyền Hình Âu Mỹ
         </h2>
         <Slider
           {...settings}

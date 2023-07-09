@@ -262,18 +262,26 @@ export default function KidFilm() {
                     title={test?.title}
                   />
                 </div>
-                <div className={styles["info-wrapper"]}>
-                  <p>{test?.description}</p>
-                </div>
                 <div className={styles["action"]}>
-                  <Link to={`/film/kid/${test?.id}`}>
+                  <Link to={`/film/homePage/${test?.id}`}>
                     <button
+                      // throw new TypeError("Cannot find id of film");
                       onClick={() => setOpen(true)}
-                      className={styles["login-btn"]}
+                      className={styles["register-btn"]}
+                    >
+                      Đăng kí gói / Thuê phim
+                    </button>
+                    <button
+                      // throw new TypeError("Cannot find id of film");
+                      onClick={() => setOpen(true)}
+                      className={styles["detail-btn"]}
                     >
                       Xem chi tiết
                     </button>
                   </Link>
+                </div>
+                <div className={styles["info-wrapper"]}>
+                  <p>{test?.description}</p>
                 </div>
               </div>
             </div>
@@ -287,7 +295,7 @@ export default function KidFilm() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          PHIM HOẠT HÌNH HAY NHẤT
+          Phim Hình Mới Hay Nhất
         </h2>
         <Slider
           {...settings}
@@ -311,7 +319,7 @@ export default function KidFilm() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          HOẠT HÌNH THIẾU NHI - XEM MÊ LY
+          Hoạt Hình Thiếu Nhi - Xem Mê Ly
         </h2>
         <Slider
           {...settings}

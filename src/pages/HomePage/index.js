@@ -7,9 +7,6 @@ import styles from "./HomePage.module.css";
 import ModalUI from "./component/Modal";
 
 export default function HomePage() {
-  // const [listFilm_Honor, setListFilm_Honor] = useState();
-  // const [listFilm_Action, setListFilm_Action] = useState();
-  // const [listFilm_Trending, setListFilm_Trending] = useState();
   const [data, setData] = useState();
   const [test, setTest] = useState();
 
@@ -56,72 +53,7 @@ export default function HomePage() {
         // handle error
       });
   };
-  // Lọc ra những bộ phim kinh dị
-  // const getListFilm_Horror = () => {
-  //   const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-  //   url.searchParams.append("type", "Horror");
-  //   fetch(url, {
-  //     method: "GET",
-  //     headers: { "content-type": "application/json" },
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       // handle error
-  //     })
-  //     .then((tasks) => {
-  //       // mockapi returns only tasks that match `Phim Hàn Quốc` string
-  //       setListFilm_Honor(tasks);
-  //     })
-  //     .catch((error) => {
-  //       // handle error
-  //     });
-  // };
-  // Lọc ra những bộ phim Anime
-  // const getListFilm_Anime = () => {
-  //   const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-  //   url.searchParams.append("type", "Action");
-  //   fetch(url, {
-  //     method: "GET",
-  //     headers: { "content-type": "application/json" },
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       // handle error
-  //     })
-  //     .then((tasks) => {
-  //       // mockapi returns only tasks that match `Phim Hàn Quốc` string
-  //       setListFilm_Action(tasks);
-  //     })
-  //     .catch((error) => {
-  //       // handle error
-  //     });
-  // };
-  // Lọc ra những bộ phim mới và Trending
-  // const getListFilm_Trending = () => {
-  //   const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-  //   url.searchParams.append("state", "Trending");
-  //   fetch(url, {
-  //     method: "GET",
-  //     headers: { "content-type": "application/json" },
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       // handle error
-  //     })
-  //     .then((tasks) => {
-  //       // mockapi returns only tasks that match `Phim Hàn Quốc` string
-  //       setListFilm_Trending(tasks);
-  //     })
-  //     .catch((error) => {
-  //       // handle error
-  //     });
-  // };
+
   // Lấy ra phim theo ID
   const filmId = useParams();
 
@@ -279,18 +211,26 @@ export default function HomePage() {
                     title={test?.title}
                   />
                 </div>
-                <div className={styles["info-wrapper"]}>
-                  <p>{test?.description}</p>
-                </div>
                 <div className={styles["action"]}>
                   <Link to={`/film/homePage/${test?.id}`}>
                     <button
+                      // throw new TypeError("Cannot find id of film");
                       onClick={() => setOpen(true)}
-                      className={styles["login-btn"]}
+                      className={styles["register-btn"]}
+                    >
+                      Đăng kí gói / Thuê phim
+                    </button>
+                    <button
+                      // throw new TypeError("Cannot find id of film");
+                      onClick={() => setOpen(true)}
+                      className={styles["detail-btn"]}
                     >
                       Xem chi tiết
                     </button>
                   </Link>
+                </div>
+                <div className={styles["info-wrapper"]}>
+                  <p>{test?.description}</p>
                 </div>
               </div>
             </div>
@@ -304,7 +244,7 @@ export default function HomePage() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          HIỆN ĐANG THỊNH HÀNH
+          Phim Mới Hiện Đang Thịnh Hành
         </h2>
         <Slider
           {...settings}
@@ -327,7 +267,7 @@ export default function HomePage() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          PHIM KINH DỊ PHỔ BIẾN
+          Phim Kinh Dị Phổ Biến
         </h2>
         <Slider
           {...settings}
@@ -350,7 +290,7 @@ export default function HomePage() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          PHIM HÀNH ĐỘNG PHỔ BIẾN
+          Phim Hành Động Phổ Biến
         </h2>
         <Slider
           {...settings}

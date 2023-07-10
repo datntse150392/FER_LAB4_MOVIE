@@ -8,13 +8,13 @@ import ThemeProviderUI from "./Theme/ThemeProvider";
 import * as Sentry from "@sentry/react";
 
 Sentry.init({
-  dsn: "https://8b4c906efb43406c9b8cd0bba0da70cb@o4505494452436992.ingest.sentry.io/4505494457483264",
+  dsn: "https://6ccfa9f567b542fc98734963e360f667@o4505500137160704.ingest.sentry.io/4505505827127296",
   integrations: [
     new Sentry.BrowserTracing({
       // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
       tracePropagationTargets: [
         "localhost",
-        "https://nha-trang-booking-test.sentry.io/projects/film_react_test/?project=4505494457483264&statsPeriod=14d",
+        "https://demo-wj.sentry.io/projects/javascript-react-demo2/?project=4505505827127296",
       ],
     }),
     new Sentry.Replay(),

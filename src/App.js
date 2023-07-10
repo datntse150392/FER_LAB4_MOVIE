@@ -17,6 +17,8 @@ import SerisFilm from "./pages/SerisFilm";
 import MyList from "./pages/MyList";
 import KidFilm from "./pages/KidFilm";
 import TVShow from "./pages/TVShow";
+import DetailFilm from "./pages/DetailFilm";
+import TrailerFilm from "./pages/TrailerFilm";
 function App() {
   return (
     <div className="App">
@@ -191,7 +193,26 @@ function App() {
           }
         />
         {/* ROUTE TVSHOW */}
-
+        {/* Detail Film */}
+        <Route
+          path="/film/detailFilm/:id"
+          element={
+            <FilmLayout>
+              <DetailFilm />
+            </FilmLayout>
+          }
+        />
+        {/* Detail Film */}
+        {/* Trailer Film */}
+        <Route
+          path="/film/trailerFilm/:id"
+          element={
+            <FilmLayout>
+              <TrailerFilm />
+            </FilmLayout>
+          }
+        />
+        {/* Trailer Film */}
         {/* {publicRoutes.map((route, index) => {
           let Layout = DefaultLayout;
           console.log(route.layout);

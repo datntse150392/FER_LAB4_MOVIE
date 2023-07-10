@@ -1,0 +1,97 @@
+.background-image {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  object-fit: cover;
+  background-color: rgb(0 0 0 / 40%);
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.44),
+      rgba(63, 60, 60, 0.715)
+    ),
+    url(https://static2.vieon.vn/vieplay-image/carousel_web_v4_ntc/2023/05/29/o65hjnai_1920x1080-culuanenduyen3-carousel_1920_1080.webp);
+  height: 757px;
+}
+
+.info-container {
+  width: 100%;
+  top: 26%;
+  margin-bottom: 1.2vw;
+  min-height: 13.2vw;
+  position: absolute;
+  margin-left: 60px;
+}
+.billboard-title img {
+  width: 500px;
+  height: 180px;
+}
+
+.info-wrapper {
+  overflow: hidden;
+  width: 600px;
+  height: 100%;
+  margin-top: 15px;
+}
+
+.info-wrapper p {
+  color: #f8f9fa;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 24px;
+  margin-top: 0.1vw;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
+  width: 100%;
+  margin-bottom: 10px;
+}
+.billboard-button-layer {
+  display: flex;
+  flex-direction: row;
+}
+.register-btn {
+  border: none;
+  width: 150px;
+  height: 48px;
+  border-radius: 43.75px;
+  background-color: #ffffff;
+  border-color: #dde2e5;
+  border-style: solid;
+  color: #000;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 21px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-btn {
+  border: none;
+  width: 50px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #9ca1a3;
+  border-color: #cccccc;
+  border-style: solid;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.list-type {
+  margin: 10px 0px;
+}
+
+.list-actor {
+  color: #ffffffe8;
+  font-size: 14px;
+  font-weight: 200;
+  margin: 5px 0px;
+}

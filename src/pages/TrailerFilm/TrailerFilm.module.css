@@ -1,0 +1,10 @@
+.motion-background {
+  overflow: hidden;
+  z-index: 0;
+  height: 757px;
+  object-fit: cover;
+}
+
+.motion-background video {
+  object-fit: cover;
+}

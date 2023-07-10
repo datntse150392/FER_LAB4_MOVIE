@@ -220,6 +220,15 @@ export default function HomePage() {
                     >
                       Đăng kí gói / Thuê phim
                     </button>
+                    {/* <button
+                      // throw new TypeError("Cannot find id of film");
+                      onClick={() => {
+                        throw new TypeError("Cannot find id of film");
+                      }}
+                      className={styles["register-btn"]}
+                    >
+                      Đăng kí gói / Thuê phim
+                    </button> */}
                     <button
                       // throw new TypeError("Cannot find id of film");
                       onClick={() => setOpen(true)}

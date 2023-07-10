@@ -267,7 +267,7 @@ export default function TVShow() {
                   />
                 </div>
                 <div className={styles["action"]}>
-                  <Link to={`/film/homePage/${test?.id}`}>
+                  <Link to={`/film/detailFilm/${test?.id}`}>
                     <button
                       // throw new TypeError("Cannot find id of film");
                       onClick={() => setOpen(true)}

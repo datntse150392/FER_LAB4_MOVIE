@@ -17,10 +17,10 @@ export default function HeaderForFilmLayout() {
           <Link to="/film/homePage">Trang chủ</Link>
         </li>
         <li style={{ fontWeight: "bold" }}>
-          <Link to="/film/series">Phim T.hình</Link>
+          <Link to="/film/action">Phim H.Động</Link>
         </li>
         <li style={{ fontWeight: "bold" }}>
-          <Link to="/film/kid">Phim Thiếu Nhi</Link>
+          <Link to="/film/series">Phim Bộ</Link>
         </li>
         <li style={{ fontWeight: "bold" }}>
           <Link to="/film/tvShow">TV Show</Link>

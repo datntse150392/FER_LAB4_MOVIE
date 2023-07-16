@@ -1,0 +1,95 @@
+.svod-trial-7day {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("https://galaxyplay.vn/landings/assets/img/svod-trial-7day-bg-web.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+.svod-trial-7day .content-body {
+  text-align: center;
+  color: #ffffff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.img-left {
+  width: 50%;
+  height: 100vh;
+  float: left;
+  position: relative;
+}
+
+.svod-trial-7day .content-body .img-left .video-ytb-wrapper {
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.svod-trial-7day .content-body .img-left .video-ytb-wrapper .video-ytb {
+  position: relative;
+  height: 300px;
+  border-radius: 4px;
+}
+
+.svod-trial-7day .content-body .content-right {
+  width: 40%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+.svod-trial-7day .content-body .content-right .container {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.svod-trial-7day .content-body .content-right .container img.img-info {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.svod-trial-7day .content-body .content-right .container .form .input-number {
+  width: 413px;
+  max-width: 85%;
+  height: 40px;
+  padding: 10px;
+  color: #ffffff;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 15px 0;
+  border: 1px solid #ffffff;
+}
+.svod-trial-7day .content-body .content-right .container .form .error-message {
+  font-size: 14px;
+  color: #ff0000;
+  height: 16px;
+  width: 413px;
+  margin: 0 auto;
+}
+.svod-trial-7day .content-body .content-right .container .form .btn-submit {
+  width: 220px;
+  height: 56px;
+  font-size: 18px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  line-height: 36px;
+  margin-bottom: 40px;
+  color: #634e44;
+  font-weight: bold;
+  border-radius: 40px;
+}
+
+.svod-trial-7day .content-body .content-right .container .note-footer {
+  width: 413px;
+  margin: 10px auto;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: left;
+  color: #ffffff;
+}

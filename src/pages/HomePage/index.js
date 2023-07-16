@@ -4,7 +4,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useParams } from "react-router-dom";
 import styles from "./HomePage.module.css";
-import ModalUI from "./component/Modal";
+import { Stack } from "react-bootstrap";
+
+// Icon
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export default function HomePage() {
   const [data, setData] = useState();
@@ -12,7 +17,9 @@ export default function HomePage() {
 
   // Lọc tất cả các phim có isActive
   const getFilms = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
+    const url = new URL(
+      "https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie"
+    );
     url.searchParams.append("isActive", true);
     fetch(url, {
       method: "GET",
@@ -33,7 +40,9 @@ export default function HomePage() {
       });
   };
   const getListFilm_Billboard = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
+    const url = new URL(
+      "https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie"
+    );
     url.searchParams.append("billboard", true);
     fetch(url, {
       method: "GET",
@@ -65,10 +74,6 @@ export default function HomePage() {
     // getListFilm_Trending();
   }, []);
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   //----------------------------------------------------------------//
   const Film_detail = data?.find((obj) => {
     return obj.id === filmId.id;
@@ -76,28 +81,26 @@ export default function HomePage() {
 
   // Lọc ra tất cả PHIM hiện có đang trending
   const listFilm_Trending = data?.filter((obj) => {
-    return obj.state === "Trending";
+    return obj.tag === "Xu hướng";
   });
 
   // Lọc ra tất cả Phim kinh dị hiện có đang hoạt động
   const listFilm_Honor = data?.filter((obj) => {
-    return obj.type === "Horror";
+    return obj.type === "Kinh dị";
   });
 
-  // Lọc ra tất cả Phim hành động hiện có đang hoạt động
-  const listFilm_Action = data?.filter((obj) => {
-    return obj.type === "Action";
+  // Lọc ra tất cả Phim Thiếu Nhi hiện có đang hoạt động
+  const listFilm_Ainme = data?.filter((obj) => {
+    return obj.type === "Anime";
   });
 
   // Lọc ra những PHIM ngoài Anime, China, Korean, Disney có quảng cáo
   const listFilm_billborad_homepage = test?.filter((obj) => {
     return (
-      obj.type !== "Anime" &&
-      obj.type !== "Korean" &&
-      obj.type !== "China" &&
-      obj.type !== "Disney" &&
-      obj.type !== "THTT" &&
-      obj.type !== "TVShow"
+      obj.type !== "TV Show" &&
+      obj.type !== "Hành động" &&
+      obj.type !== "Cổ trang" &&
+      obj.type !== "Việt"
     );
   });
 
@@ -172,17 +175,32 @@ export default function HomePage() {
     ],
   };
 
+  const myFunction = () => {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  };
   return (
     <div className={styles["container-homepage"]}>
-      {/* MADAL */}
-      {Film_detail && (
-        <ModalUI
-          Film_detail={Film_detail}
-          open={open}
-          handleClose={handleClose}
-        />
-      )}
-      {/* MADAL */}
+      {/* POPUP QC */}
+      <div id="myDIV" className={styles["popupPromotion"]}>
+        <Link to="/7dayfreetrial">
+          <img src="https://assets.glxplay.io/images/w1200/fa2300dfbd1cf79a1ba3eb359db3c3c5.jpg" />
+        </Link>
+        <div className={styles["popupPromotion-close"]}>
+          <CancelIcon
+            sx={{ color: "#fff", cursor: "pointer" }}
+            fontSize="large"
+            onClick={() => {
+              myFunction();
+            }}
+          />
+        </div>
+      </div>
+      {/* POPUP QC */}
 
       {/* SHOW BILLBOARD  */}
       {test && (
@@ -195,7 +213,7 @@ export default function HomePage() {
               <div className={styles["motion-background"]}>
                 {/* <img src={test[0]?.imgBG} /> */}
                 <video
-                  src={test?.imgBG}
+                  src={test?.trailerURL}
                   style={{ height: "100%", width: "100%", overflow: "hidden" }}
                   autoPlay
                   muted
@@ -212,34 +230,31 @@ export default function HomePage() {
                   />
                 </div>
                 <div className={styles["action"]}>
-                  <Link to={`/film/detailFilm/${test?.id}`}>
-                    <button
-                      // throw new TypeError("Cannot find id of film");
-                      onClick={() => setOpen(true)}
-                      className={styles["register-btn"]}
-                    >
-                      Đăng kí gói / Thuê phim
-                    </button>
-                    {/* <button
-                      // throw new TypeError("Cannot find id of film");
-                      onClick={() => {
-                        throw new TypeError("Cannot find id of film");
-                      }}
-                      className={styles["register-btn"]}
-                    >
-                      Đăng kí gói / Thuê phim
-                    </button> */}
-                    <button
-                      // throw new TypeError("Cannot find id of film");
-                      onClick={() => setOpen(true)}
-                      className={styles["detail-btn"]}
-                    >
-                      Xem chi tiết
-                    </button>
-                  </Link>
+                  <Stack style={{ display: "flex" }} direction="row">
+                    <Link to={"#"}>
+                      <button className={styles["register-btn"]}>
+                        <PlayArrowIcon />
+                        Đăng kí gói
+                      </button>
+                    </Link>
+                    <Link to={"/film/detailFilm/1"}>
+                      <button className={styles["detail-btn"]}>
+                        <BookmarkAddIcon />
+                        Thêm vào danh sách
+                      </button>
+                    </Link>
+                  </Stack>
                 </div>
                 <div className={styles["info-wrapper"]}>
-                  <p>{test?.description}</p>
+                  <Stack style={{ display: "flex" }} direction="row">
+                    <p>
+                      {test?.description}
+                      &nbsp; &nbsp;
+                      <Link to={`/film/detailFilm/${test?.id}`}>
+                        Xem chi tiết
+                      </Link>
+                    </p>
+                  </Stack>
                 </div>
               </div>
             </div>
@@ -262,8 +277,8 @@ export default function HomePage() {
           {listFilm_Trending?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/homePage/${film.id}`}>
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
+                <Link to={`/film/detailFilm/${film.id}`}>
+                  <img src={film.img} alt={film.title} />
                 </Link>
               </div>
             </div>
@@ -285,8 +300,8 @@ export default function HomePage() {
           {listFilm_Honor?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/homePage/${film.id}`}>
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
+                <Link to={`/film/detailFilm/${film.id}`}>
+                  <img src={film.img} alt={film.title} />
                 </Link>
               </div>
             </div>
@@ -294,22 +309,28 @@ export default function HomePage() {
         </Slider>
         {/*  Tổng hợp tất cả bộ phim kinh dị */}
 
+        {/* QC */}
+        <div className={styles["style__RatioImage"]}>
+          <img src="https://assets.glxplay.io/images/w1264/83d20b440fb4f058f55413a93b049f00.jpg" />
+        </div>
+        {/* QC */}
+
         {/* Tổng hợp tất cả bộ phim Anime*/}
         <h2
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          Phim Hành Động Phổ Biến
+          Phim Anime Phổ Biến
         </h2>
         <Slider
           {...settings}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {listFilm_Action?.map((film, index) => (
+          {listFilm_Ainme?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/homePage/${film.id}`}>
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
+                <Link to={`/film/detailFilm/${film.id}`}>
+                  <img src={film.img} alt={film.title} />
                 </Link>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import Button from "@mui/material/Button";
 import { Paper, Stack } from "@mui/material";
@@ -7,43 +7,64 @@ import styles from "./DetailFilm.module.css";
 // Icon
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import { getFilmByID } from "../../api/film";
+import axios from "axios";
 export default function DetailFilm() {
   const [value, setValue] = React.useState(0);
-  const filmID = useParams();
+
+  const [filmDetail, setFilmDetail] = useState();
+  // Get Params
+  const FilmID = useParams();
+  async function getFilmByID(id) {
+    try {
+      const response = await axios.get(
+        "https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie/" + id
+      );
+      setFilmDetail(response?.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getFilmByID(FilmID.id);
+  }, []);
   return (
     <Paper
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
       elevation={1}
     >
-      <div className={styles["background-image"]}>
+      <div
+        style={{
+          backgroundSize: "cover",
+          backgroundImage: `linear-gradient(to right bottom,rgba(0, 0, 0, 0.44),rgba(63, 60, 60, 0.715)),url(${filmDetail?.imgBG})`,
+        }}
+        className={styles["background-image"]}
+      >
         <div className={styles["info-container"]}>
           <div className={styles["billboard-title"]}>
             <img
               alt=""
               className={styles["title-logo"]}
-              src="https://static2.vieon.vn/vieplay-image/title_card_dark/2023/05/29/igj0jqy5_title-culuanenduyen-nendene86e73a666cb111177a691d62a72d049_815_255.webp"
+              src={filmDetail?.imgLogo}
               title=""
             />
           </div>
           <div className={styles["info-wrapper"]}>
-            <p>
-              Màn bắt tay chống lại cái ác của bộ đôi trái tính - thiên tài lừa
-              đảo lãnh cảm cùng luật sư đồng cảm thái quá, do Chun Woo Hee cùng
-              Kim Dong Wook đóng chính.
-            </p>
+            <p>{filmDetail?.description}</p>
           </div>
 
           {/* info-main */}
           <div className={styles["info-main"]}>
             <div className={styles["list-type"]}>
               <div className={styles["list-actor"]}>
-                <p>Diễn viên: Avin Lu, Khánh Vân, Vũ Phương Linh</p>
+                <p>Diễn viên: {filmDetail?.actor}</p>
               </div>
               <div className={styles["list-actor"]}>
-                <p>Đạo diễn: Thắng Vũ</p>
+                <p>Đạo diễn: {filmDetail?.director}</p>
               </div>
               <div className={styles["list-actor"]}>
-                <p>Thể loại: Phim Việt, Lãng mạn, Tình cảm</p>
+                <p>Thể loại: {filmDetail?.type}</p>
               </div>
             </div>
           </div>
@@ -51,13 +72,13 @@ export default function DetailFilm() {
 
           <div className={styles["action"]}>
             <Stack direction={"row"}>
-              <Link to={"#"}>
+              <Link to={`/film/detailFilm/${filmDetail?.id}`}>
                 <button className={styles["register-btn"]}>
                   <PlayArrowIcon />
                   Đăng kí gói
                 </button>
               </Link>
-              <Link to={"/film/trailerFilm/1"}>
+              <Link to={`/film/trailerFilm/${filmDetail?.id}`}>
                 <button className={styles["detail-btn"]}>
                   <FavoriteBorderIcon />
                 </button>
@@ -80,7 +101,7 @@ export default function DetailFilm() {
             setValue(newValue);
           }}
         >
-          <Link to={"/film/detailFilm/1"}>
+          <Link to={`/film/detailFilm/${filmDetail?.id}`}>
             <Button
               variant="text"
               sx={{
@@ -96,7 +117,7 @@ export default function DetailFilm() {
             </Button>
           </Link>
 
-          <Link to={"/film/trailerFilm/1"}>
+          <Link to={`/film/trailerFilm/${filmDetail?.id}`}>
             <Button
               variant="text"
               sx={{

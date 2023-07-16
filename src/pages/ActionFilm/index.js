@@ -3,34 +3,22 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useParams } from "react-router-dom";
-import styles from "./KidFilm.module.css";
-import ModalUI from "./component/Modal";
+import styles from "./ActionFilm.module.css";
+import { Stack } from "react-bootstrap";
 
-// const style = {
-//   position: "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-//   width: "70%",
-//   bgcolor: "background.paper",
-//   borderradius: "20px",
-//   boxShadow: 24,
-//   p: 4,
-//   backgroundColor: "#0000009d",
-//   padding: "0px",
-//   borderRadius: "15px",
-// };
+// Icon
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 
-export default function KidFilm() {
-  // API FUNCTION
+export default function ActionFilm() {
   const [data, setData] = useState();
   const [test, setTest] = useState();
-  // const [listFilm_Ainime, setListFilm_Ainime] = useState();
-  // const [listFilm_Disney, setListFilm_Disney] = useState();
 
   // Lọc tất cả các phim có isActive
   const getFilms = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
+    const url = new URL(
+      "https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie"
+    );
     url.searchParams.append("isActive", true);
     fetch(url, {
       method: "GET",
@@ -43,64 +31,17 @@ export default function KidFilm() {
         // handle error
       })
       .then((tasks) => {
+        // mockapi returns only tasks that match `Phim Hàn Quốc` string
         setData(tasks);
       })
       .catch((error) => {
         // handle error
       });
   };
-
-  // Lấy danh sách Anime && Trending
-  // const getListFilm_Anime = () => {
-  //   const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-  //   url.searchParams.append("type", "Anime");
-  //   url.searchParams.append("isActive", true);
-  //   url.searchParams.append("state", "Trending");
-  //   fetch(url, {
-  //     method: "GET",
-  //     headers: { "content-type": "application/json" },
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       // handle error
-  //     })
-  //     .then((tasks) => {
-  //       setListFilm_Ainime(tasks);
-  //     })
-  //     .catch((error) => {
-  //       // handle error
-  //     });
-  // };
-
-  // Lấy danh sách Disney
-  // const getListFilm_Disney = () => {
-  //   const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-  //   url.searchParams.append("type", "Disney");
-  //   url.searchParams.append("isActive", true);
-  //   fetch(url, {
-  //     method: "GET",
-  //     headers: { "content-type": "application/json" },
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       // handle error
-  //     })
-  //     .then((tasks) => {
-  //       // mockapi returns only tasks that match `Phim Hàn Quốc` string
-  //       setListFilm_Disney(tasks);
-  //     })
-  //     .catch((error) => {
-  //       // handle error
-  //     });
-  // };
-
-  // Lấy danh sách phim đang quảng cáo để show quảng cáo
   const getListFilm_Billboard = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
+    const url = new URL(
+      "https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie"
+    );
     url.searchParams.append("billboard", true);
     fetch(url, {
       method: "GET",
@@ -121,36 +62,31 @@ export default function KidFilm() {
       });
   };
 
+  // Lấy ra phim theo ID
+  const filmId = useParams();
+
   useEffect(() => {
     getFilms();
-    // getListFilm_Anime();
-    // getListFilm_Disney();
     getListFilm_Billboard();
   }, []);
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   //----------------------------------------------------------------//
-  const filmId = useParams();
   const Film_detail = data?.find((obj) => {
     return obj.id === filmId.id;
   });
 
-  // Lấy ra danh sách các phim Anime đang có quảng cáo
-  const List_Film_BiilBorad_Anime = test?.filter((obj) => {
-    return obj.type === "Disney";
+  // Lọc ra tất cả PHIM HÀNH ĐỘNG hiện có đang trending
+  const listFilm_actionFilm_trending = data?.filter((obj) => {
+    return obj.tag === "Xu hướng" && obj.type === "Hành động";
   });
 
-  // Lấy ra danh sách các Phim DISNEY đang active
-  const listFilm_Disney = data?.filter((obj) => {
-    return obj.type === "Disney";
+  // Lọc ra tất cả Phim hành động hiện có
+  const listFilm_actionFilm = data?.filter((obj) => {
+    return obj.type === "Hành động";
   });
-
-  // Lấy ra danh sách các Phim ANIME đang active
-  const listFilm_Ainime = data?.filter((obj) => {
-    return obj.type === "Anime";
+  // Lọc ra những PHIM HÀNH ĐỘNG có quảng cáo
+  const listFilm_billborad_actionFilm = test?.filter((obj) => {
+    return obj.type === "Hành động";
   });
 
   // Sẽ phải tách ra thành 1 component riêng và gắn vào như component AVT "MUI MODAL"
@@ -226,30 +162,21 @@ export default function KidFilm() {
 
   return (
     <div className={styles["container-homepage"]}>
-      {/* MADAL */}
-      {Film_detail && (
-        <ModalUI
-          Film_detail={Film_detail}
-          open={open}
-          handleClose={handleClose}
-        />
-      )}
-      {/* MADAL */}
       {/* SHOW BILLBOARD  */}
       {test && (
         <Slider
           {...settings1}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {List_Film_BiilBorad_Anime?.map((test, index) => (
+          {listFilm_billborad_actionFilm?.map((test, index) => (
             <div className={styles["billboard-motion"]}>
               <div className={styles["motion-background"]}>
+                {/* <img src={test[0]?.imgBG} /> */}
                 <video
-                  id="myVideo"
-                  src={test?.imgBG}
+                  src={test?.trailerURL}
                   style={{ height: "100%", width: "100%", overflow: "hidden" }}
-                  muted
                   autoPlay
+                  muted
                   loop
                 />
               </div>
@@ -263,25 +190,31 @@ export default function KidFilm() {
                   />
                 </div>
                 <div className={styles["action"]}>
-                  <Link to={`/film/detailFilm/${test?.id}`}>
-                    <button
-                      // throw new TypeError("Cannot find id of film");
-                      onClick={() => setOpen(true)}
-                      className={styles["register-btn"]}
-                    >
-                      Đăng kí gói / Thuê phim
-                    </button>
-                    <button
-                      // throw new TypeError("Cannot find id of film");
-                      onClick={() => setOpen(true)}
-                      className={styles["detail-btn"]}
-                    >
-                      Xem chi tiết
-                    </button>
-                  </Link>
+                  <Stack style={{ display: "flex" }} direction="row">
+                    <Link to={"#"}>
+                      <button className={styles["register-btn"]}>
+                        <PlayArrowIcon />
+                        Đăng kí gói
+                      </button>
+                    </Link>
+                    <Link to={"/film/detailFilm/1"}>
+                      <button className={styles["detail-btn"]}>
+                        <BookmarkAddIcon />
+                        Thêm vào danh sách
+                      </button>
+                    </Link>
+                  </Stack>
                 </div>
                 <div className={styles["info-wrapper"]}>
-                  <p>{test?.description}</p>
+                  <Stack style={{ display: "flex" }} direction="row">
+                    <p>
+                      {test?.description}
+                      &nbsp; &nbsp;
+                      <Link to={`/film/detailFilm/${test?.id}`}>
+                        Xem chi tiết
+                      </Link>
+                    </p>
+                  </Stack>
                 </div>
               </div>
             </div>
@@ -290,53 +223,51 @@ export default function KidFilm() {
       )}
       {/* SHOW BILLBOARD */}
       <div className={styles["slider-content"]}>
-        {/* Tổng hợp tất cả phim Hoạt hình hay nhất*/}
+        {/* Tổng hợp tất cả bộ phim hành động hiện đang thịnh hành*/}
         <h2
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          Phim Hình Mới Hay Nhất
+          Phim Hành Động Hiện Đang Thịnh Hành
         </h2>
         <Slider
           {...settings}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {listFilm_Ainime?.map((film, index) => (
+          {listFilm_actionFilm_trending?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/kid/${film.id}`}>
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
+                <Link to={`/film/detailFilm/${film.id}`}>
+                  <img src={film.img} alt={film.title} />
                 </Link>
               </div>
             </div>
           ))}
         </Slider>
-        {/* Tổng hợp tất cả phim Hoạt hình hay nhất */}
+        {/* Tổng hợp tất cả bộ phim thịnh hành */}
 
-        {/* Tổng hợp tất cả phim Disney*/}
+        {/* Tổng hợp tất cả bộ phim hành động hiện có */}
         <h2
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          Hoạt Hình Thiếu Nhi - Xem Mê Ly
+          Danh Sách Phim Hành Động
         </h2>
         <Slider
           {...settings}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {listFilm_Disney?.map((film, index) => (
+          {listFilm_actionFilm?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
-                <Link to={`/film/kid/${film.id}`}>
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
+                <Link to={`/film/detailFilm/${film.id}`}>
+                  <img src={film.img} alt={film.title} />
                 </Link>
               </div>
             </div>
           ))}
         </Slider>
-        {/* Tổng hợp tất cả phim Disney */}
+        {/*  Tổng hợp tất cả bộ  phim hành động hiện có */}
       </div>
     </div>
   );

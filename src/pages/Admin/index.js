@@ -24,14 +24,12 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 // Pagination
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 
 export default function Admin() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState();
   const getFilms = () => {
-    fetch("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films", {
+    fetch("https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie", {
       method: "GET",
       headers: { "content-type": "application/json" },
     })
@@ -99,7 +97,6 @@ export default function Admin() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* Cách để fix bug khi dùng use */}
             {data?.map((data, index) => (
               <TableRow hover role="checkbox" tabIndex={-1} key={data.id}>
                 <TableCell align="left">{data.id}</TableCell>
@@ -116,7 +113,7 @@ export default function Admin() {
                 <TableCell sx={{ width: "200px" }} align="left">
                   {data.director}
                 </TableCell>
-                <TableCell align="left">{data.state}</TableCell>
+                <TableCell align="left">{data.tag}</TableCell>
                 <TableCell align="left">
                   <Switch
                     checked={data.billboard}
@@ -128,7 +125,7 @@ export default function Admin() {
                         )
                       ) {
                         fetch(
-                          `https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films/${data.id}`,
+                          `https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie/${data.id}`,
                           {
                             method: "PUT", // or PATCH
                             headers: { "content-type": "application/json" },
@@ -167,7 +164,7 @@ export default function Admin() {
                         )
                       ) {
                         fetch(
-                          `https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films/${data.id}`,
+                          `https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie/${data.id}`,
                           {
                             method: "PUT", // or PATCH
                             headers: { "content-type": "application/json" },

@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
+import { transliterate } from "transliteration";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -39,7 +40,7 @@ export default function UpdateFilm() {
   async function getFilmByID(id) {
     try {
       const response = await axios.get(
-        "https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films/" + id
+        "https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie/" + id
       );
       setFilmDetail(response?.data);
     } catch (error) {
@@ -51,15 +52,22 @@ export default function UpdateFilm() {
     getFilmByID(FilmID.id);
   }, []);
 
-  console.log(filmDetail);
+  const originalString = `${filmDetail?.title}`;
+  const formattedString = transliterate(originalString)
+    .toLowerCase()
+    .replace(/\s+/g, "-");
+
   const handlesubmit = (e) => {
     e.preventDefault();
     if (window.confirm("Bạn chắc chắn muốn cập nhật phim này không?")) {
-      fetch(`https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films/${FilmID.id}`, {
-        method: "PUT", // or PATCH
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(filmDetail),
-      })
+      fetch(
+        `https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie/${FilmID.id}`,
+        {
+          method: "PUT", // or PATCH
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(filmDetail),
+        }
+      )
         .then(() => {
           navigate("/admin");
         })
@@ -93,6 +101,7 @@ export default function UpdateFilm() {
                       setFilmDetail((prev) => ({
                         ...prev,
                         title: e.target.value,
+                        slug: formattedString,
                       }))
                     }
                     id="filled-basic"
@@ -119,17 +128,14 @@ export default function UpdateFilm() {
                         }))
                       }
                     >
-                      <option value={"Horror"}>Phim kinh dị</option>
-                      <option value={"Korean"}>Phim Hàn Quốc</option>
+                      <option value={"Kinh dị"}>Phim Kinh Dị</option>
+                      <option value={"Truyền Hình"}>Phim Truyền Hình</option>
+                      <option value={"Hành động"}>Phim Hành Động</option>
                       <option value={"Anime"}>Phim Anime</option>
-                      <option value={"Disney"}>Phim Disney</option>
-                      <option value={"Action"}>
-                        Phim hành động & phiêu lưu
-                      </option>
-                      <option value={"China"}>Phim Trung Quốc</option>
-                      <option value={"USUK"}>Phim Âu Mỹ</option>
-                      <option value={"TVShow"}>TV Show</option>
-                      <option value={"THTT"}>Truyền hình thực tế</option>
+                      <option value={"Việt"}>Phim Việt</option>
+                      <option value={"Cổ trang"}>Phim Cổ Trang</option>
+                      <option value={"Âu mỹ"}>Phim Trung Quốc</option>
+                      <option value={"TV Show"}>Phim Âu Mỹ</option>
                     </NativeSelect>
                     <FormHelperText>Mời bạn chọn thể loại phim</FormHelperText>
                   </FormControl>
@@ -217,21 +223,22 @@ export default function UpdateFilm() {
                 <Item sx={{ height: "100%", overflow: "hidden" }}>
                   <FormControl sx={{ m: 1, minWidth: 120, width: "90%" }}>
                     <NativeSelect
-                      defaultValue={filmDetail?.state}
+                      defaultValue={filmDetail?.tag}
                       inputProps={{
                         name: "age",
                         id: "uncontrolled-native",
                       }}
-                      value={filmDetail?.state}
+                      value={filmDetail?.tag}
                       onChange={(e) =>
                         setFilmDetail((prev) => ({
                           ...prev,
-                          state: e.target.value,
+                          tag: e.target.value,
                         }))
                       }
                     >
                       <option value={""}>Mặc định</option>
-                      <option value={"Trending"}>Xu hướng</option>
+                      <option value={"Xu hướng"}>Xu hướng</option>
+                      <option value={"Top View"}>Top View</option>
                     </NativeSelect>
                     <FormHelperText>Trạng thái</FormHelperText>
                   </FormControl>

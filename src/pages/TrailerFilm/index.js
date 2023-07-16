@@ -1,13 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import Button from "@mui/material/Button";
 import { Paper, Stack } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import styles from "./TrailerFilm.module.css";
+import axios from "axios";
+// Icon
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import { useTransition } from "react";
 
 export default function TrailerFilm() {
   const [value, setValue] = React.useState(0);
-  const filmID = useParams();
+  const [filmDetail, setFilmDetail] = useState();
+  const [muted, setMuted] = useState(true);
+  // Get Params
+  const FilmID = useParams();
+  async function getFilmByID(id) {
+    try {
+      const response = await axios.get(
+        "https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie/" + id
+      );
+      setFilmDetail(response?.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getFilmByID(FilmID.id);
+  }, []);
+
+  const disableMute = () => {
+    var x = document.getElementById("myVideo");
+    if (x !== null) {
+      x.muted = true;
+      setMuted(!muted);
+    }
+  };
+
+  const enableMute = () => {
+    var x = document.getElementById("myVideo");
+    if (x !== null) {
+      x.muted = false;
+      setMuted(!muted);
+    }
+  };
+
   return (
     <Paper
       sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
@@ -16,7 +55,8 @@ export default function TrailerFilm() {
       <div className={styles["motion-background"]}>
         {/* <img src={test[0]?.imgBG} /> */}
         <video
-          src="https://trailer.vieon.vn/Teaser_DelightfullyDeceiful.mp4"
+          id="myVideo"
+          src={filmDetail?.trailerURL}
           style={{ height: "100%", width: "100%", overflow: "hidden" }}
           autoPlay
           muted
@@ -38,7 +78,7 @@ export default function TrailerFilm() {
           setValue(newValue);
         }}
       >
-        <Link to={"/film/detailFilm/1"}>
+        <Link to={`/film/detailFilm/${filmDetail?.id}`}>
           <Button
             variant="text"
             sx={{
@@ -53,8 +93,7 @@ export default function TrailerFilm() {
             Tổng quan
           </Button>
         </Link>
-
-        <Link to={"/film/trailerFilm/1"}>
+        <Link to={`/film/trailerFilm/${filmDetail?.id}`}>
           <Button
             variant="text"
             sx={{
@@ -69,6 +108,34 @@ export default function TrailerFilm() {
             TRAILER
           </Button>
         </Link>
+
+        {muted ? (
+          <Button
+            style={{
+              color: "#fff",
+              position: "absolute",
+              right: "8%",
+            }}
+            onClick={() => {
+              enableMute();
+            }}
+          >
+            <VolumeUpIcon fontSize="large" />
+          </Button>
+        ) : (
+          <Button
+            style={{
+              color: "#fff",
+              position: "absolute",
+              right: "8%",
+            }}
+            onClick={() => {
+              disableMute();
+            }}
+          >
+            <VolumeOffIcon fontSize="large" />
+          </Button>
+        )}
       </BottomNavigation>
     </Paper>
   );

@@ -13,12 +13,15 @@ import Contact from "./pages/Contact";
 import HomePage from "./pages/HomePage";
 import CreateFilm from "./pages/CreateFilm";
 import UpdateFilm from "./pages/UpdateFilm";
-import SerisFilm from "./pages/SerisFilm";
 import MyList from "./pages/MyList";
-import KidFilm from "./pages/KidFilm";
 import TVShow from "./pages/TVShow";
 import DetailFilm from "./pages/DetailFilm";
 import TrailerFilm from "./pages/TrailerFilm";
+import ActionFilm from "./pages/ActionFilm";
+import SeriesFilm from "./pages/SeriesFilm";
+import UserProfile from "./pages/UserProfile";
+import WatchFilm from "./pages/WatchFilm";
+import FreeTrial from "./pages/7DayFreeTrial";
 function App() {
   return (
     <div className="App">
@@ -144,7 +147,7 @@ function App() {
           path="/film/series"
           element={
             <FilmLayout>
-              <SerisFilm />
+              <SeriesFilm />
             </FilmLayout>
           }
         />
@@ -152,25 +155,25 @@ function App() {
           path="/film/series/:id"
           element={
             <FilmLayout>
-              <SerisFilm />
+              <SeriesFilm />
             </FilmLayout>
           }
         />
         {/* ROUTE PHIM TRUYỀN HÌNH */}
-        {/* ROUTE PHIM Dành Cho Trẻ EM */}
+        {/* ROUTE PHIM HÀNH ĐỘNG */}
         <Route
-          path="/film/kid"
+          path="/film/action"
           element={
             <FilmLayout>
-              <KidFilm />
+              <ActionFilm />
             </FilmLayout>
           }
         />
         <Route
-          path="/film/kid/:id"
+          path="/film/action/:id"
           element={
             <FilmLayout>
-              <KidFilm />
+              <ActionFilm />
             </FilmLayout>
           }
         />
@@ -213,6 +216,26 @@ function App() {
           }
         />
         {/* Trailer Film */}
+        {/* Watching Film */}
+        <Route
+          path="/film/WatchFilm"
+          element={
+            <Fragment>
+              <WatchFilm />
+            </Fragment>
+          }
+        />
+        {/* Watching Film */}
+        {/* 7 Day Free Trial */}
+        <Route
+          path="/7dayfreetrial"
+          element={
+            <Fragment>
+              <FreeTrial />
+            </Fragment>
+          }
+        />
+        {/* Watching Film */}
         {/* {publicRoutes.map((route, index) => {
           let Layout = DefaultLayout;
           console.log(route.layout);
@@ -241,6 +264,17 @@ function App() {
             />
           );
         })} */}
+
+        {/* DEV KHAI */}
+        {/* Account Profile */}
+        <Route
+          path="/account/userprofile"
+          element={
+            <FilmLayout>
+              <UserProfile />
+            </FilmLayout>
+          }
+        />
       </Routes>
     </div>
   );

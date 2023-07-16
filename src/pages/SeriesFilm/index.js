@@ -3,14 +3,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useParams } from "react-router-dom";
-import styles from "./TVShow.module.css";
+import styles from "./SeriesFilm.module.css";
 import { Stack } from "react-bootstrap";
 
 // Icon
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 
-export default function TVShow() {
+export default function SeriesFilm() {
   const [data, setData] = useState();
   const [test, setTest] = useState();
 
@@ -31,6 +31,7 @@ export default function TVShow() {
         // handle error
       })
       .then((tasks) => {
+        // mockapi returns only tasks that match `Phim Hàn Quốc` string
         setData(tasks);
       })
       .catch((error) => {
@@ -75,17 +76,19 @@ export default function TVShow() {
   });
 
   // Lọc ra tất cả PHIM  hiện có đang trending
-  const listFilm_TVShow_trending = data?.filter((obj) => {
-    return obj.tag === "Xu hướng" && obj.type === "TV Show";
+  const listFilm_seriesFilm_trending = data?.filter((obj) => {
+    return (
+      (obj.tag === "Xu hướng" && obj.type === "Cổ trang") || obj.type === "Việt"
+    );
   });
 
   // Lọc ra tất cả Phim hành động hiện có
-  const listFilm_TVShow = data?.filter((obj) => {
-    return obj.type === "TV Show";
+  const listFilm_chinaFilm = data?.filter((obj) => {
+    return obj.type === "Cổ trang";
   });
-  // Lọc ra những TVShow có quảng cáo
-  const listFilm_billborad_TVShow = test?.filter((obj) => {
-    return obj.type === "TV Show";
+  // Lọc ra những PHIM HÀNH ĐỘNG có quảng cáo
+  const listFilm_billborad_seriesFilm = test?.filter((obj) => {
+    return obj.type === "Cổ trang" || obj.type === "Việt";
   });
 
   // Sẽ phải tách ra thành 1 component riêng và gắn vào như component AVT "MUI MODAL"
@@ -167,7 +170,7 @@ export default function TVShow() {
           {...settings1}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {listFilm_billborad_TVShow?.map((test, index) => (
+          {listFilm_billborad_seriesFilm?.map((test, index) => (
             <div className={styles["billboard-motion"]}>
               <div className={styles["motion-background"]}>
                 {/* <img src={test[0]?.imgBG} /> */}
@@ -227,13 +230,13 @@ export default function TVShow() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          TVShow HOT
+          Phim Đang Thịnh Hành
         </h2>
         <Slider
           {...settings}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {listFilm_TVShow_trending?.map((film, index) => (
+          {listFilm_seriesFilm_trending?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
                 <Link to={`/film/detailFilm/${film.id}`}>
@@ -250,13 +253,13 @@ export default function TVShow() {
           style={{ color: "white" }}
           className={styles["container-news-title"]}
         >
-          Danh Sách TVShow
+          Danh Sách Phim Cổ Trang Huyền Huyễn
         </h2>
         <Slider
           {...settings}
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
-          {listFilm_TVShow?.map((film, index) => (
+          {listFilm_chinaFilm?.map((film, index) => (
             <div className={styles["news"]} key={index}>
               <div className={styles["news-top"]}>
                 <Link to={`/film/detailFilm/${film.id}`}>

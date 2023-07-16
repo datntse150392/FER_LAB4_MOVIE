@@ -12,6 +12,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import HomeIcon from "@mui/icons-material/Home";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate, redirect, Link } from "react-router-dom";
 export default function AccountMenu() {
   const navigate = useNavigate();
@@ -117,6 +118,14 @@ export default function AccountMenu() {
               <HomeIcon fontSize="small" />
             </ListItemIcon>
             Trang chủ
+          </MenuItem>
+        </Link>
+        <Link to="/account/userprofile">
+          <MenuItem sx={{ color: "#333" }}>
+            <ListItemIcon>
+              <PersonIcon fontSize="small" />
+            </ListItemIcon>
+            Tài khoản
           </MenuItem>
         </Link>
         <MenuItem onClick={handleLogout}>

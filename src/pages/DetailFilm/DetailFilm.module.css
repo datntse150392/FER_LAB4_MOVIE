@@ -1,16 +1,9 @@
 .background-image {
   height: 100%;
   width: 100%;
-  background-size: cover;
   object-fit: cover;
   background-color: rgb(0 0 0 / 40%);
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(0, 0, 0, 0.44),
-      rgba(63, 60, 60, 0.715)
-    ),
-    url(https://static2.vieon.vn/vieplay-image/carousel_web_v4_ntc/2023/05/29/o65hjnai_1920x1080-culuanenduyen3-carousel_1920_1080.webp);
-  height: 757px;
+  height: 789px;
 }
 
 .info-container {

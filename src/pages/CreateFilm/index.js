@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { transliterate } from "transliteration";
 
 // Button MUI
 import Button from "@mui/material/Button";
@@ -31,9 +32,9 @@ export default function CreateFilm() {
 
   const [formValue, setFormValue] = useState({
     title: "",
-    billboard: true,
-    state: "",
-    type: "Phim kinh dị",
+    billboard: false,
+    tag: "",
+    type: "tvshow",
     duration: "",
     director: "",
     actor: "",
@@ -43,13 +44,13 @@ export default function CreateFilm() {
     trailerURL: "",
     description: "",
     isActive: false,
-    myList: false,
+    slug: "",
   });
 
   const handlesubmit = (e) => {
     e.preventDefault();
     if (window.confirm("Bạn có muốn xác thực tạo phim hay không?")) {
-      fetch("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films", {
+      fetch("https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(formValue),
@@ -62,8 +63,13 @@ export default function CreateFilm() {
         });
     }
   };
-  console.log(formValue);
 
+  const originalString = `${formValue.title}`;
+  const formattedString = transliterate(originalString)
+    .toLowerCase()
+    .replace(/\s+/g, "-");
+
+  console.log(formattedString);
   return (
     <React.Fragment>
       <form onSubmit={handlesubmit}>
@@ -88,6 +94,7 @@ export default function CreateFilm() {
                       setFormValue((prev) => ({
                         ...prev,
                         title: e.target.value,
+                        slug: formattedString,
                       }))
                     }
                     id="filled-basic"
@@ -113,17 +120,16 @@ export default function CreateFilm() {
                       inputProps={{ "aria-label": "Without label" }}
                       sx={{ height: "30px", width: "100%", overflow: "hidden" }}
                     >
-                      <MenuItem value={"Horror"}>Phim kinh dị</MenuItem>
-                      <MenuItem value={"Korean"}>Phim Hàn Quốc</MenuItem>
-                      <MenuItem value={"Action"}>
-                        Phim hành động & phiêu lưu
+                      <MenuItem value={"Kinh dị"}>Phim Kinh Dị</MenuItem>
+                      <MenuItem value={"Truyền Hình"}>
+                        Phim Truyền Hình
                       </MenuItem>
+                      <MenuItem value={"Hành động"}>Phim Hành Động</MenuItem>
                       <MenuItem value={"Anime"}>Phim Anime</MenuItem>
-                      <MenuItem value={"Disney"}>Phim Disney</MenuItem>
-                      <MenuItem value={"China"}>Phim Trung Quốc</MenuItem>
-                      <MenuItem value={"USUK"}>Phim Âu Mỹ</MenuItem>
-                      <MenuItem value={"TVShow"}>TV Show</MenuItem>
-                      <MenuItem value={"THTT"}>Truyền hình thực tế</MenuItem>
+                      <MenuItem value={"Việt"}>Phim Việt</MenuItem>
+                      <MenuItem value={"Cổ trang"}>Phim Cổ Trang</MenuItem>
+                      <MenuItem value={"Âu mỹ"}>Phim Âu Mỹ</MenuItem>
+                      <MenuItem value={"TV Show"}>TV Show</MenuItem>
                     </Select>
                     <FormHelperText>Mời bạn chọn thể loại phim</FormHelperText>
                   </FormControl>
@@ -205,11 +211,11 @@ export default function CreateFilm() {
                 <Item sx={{ height: "72px", overflow: "hidden" }}>
                   <FormControl sx={{ m: 1, minWidth: 120, width: "90%" }}>
                     <Select
-                      value={formValue.state}
+                      value={formValue.tag}
                       onChange={(e) =>
                         setFormValue((prev) => ({
                           ...prev,
-                          state: e.target.value,
+                          tag: e.target.value,
                         }))
                       }
                       displayEmpty
@@ -217,7 +223,8 @@ export default function CreateFilm() {
                       sx={{ height: "30px", width: "100%", overflow: "hidden" }}
                     >
                       <MenuItem value={""}>Mặc định</MenuItem>
-                      <MenuItem value={"Trending"}>Xu hướng</MenuItem>
+                      <MenuItem value={"Xu hướng"}>Xu hướng</MenuItem>
+                      <MenuItem value={"Top View"}>Top View</MenuItem>
                     </Select>
                     <FormHelperText>Trạng thái</FormHelperText>
                   </FormControl>

@@ -11,6 +11,17 @@ export default function HeaderForAdminLayout() {
           <img src={images.logo} />
         </Link>
       </div>
+      <ul className={styles["nav"]}>
+        <li style={{ fontWeight: "bold" }}>
+          <Link to="/admin">Phim</Link>
+        </li>
+        <li style={{ fontWeight: "bold" }}>
+          <Link to="#">Tài khoản</Link>
+        </li>
+        <li style={{ fontWeight: "bold" }}>
+          <Link to="#">Doanh thu</Link>
+        </li>
+      </ul>
       <div className={styles["header-action"]}>
         <Link to="/admin/createFilm">
           <button className={styles["header-addfilm-btn"]}>

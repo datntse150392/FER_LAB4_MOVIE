@@ -3,37 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { images } from "../../assets/images";
 import styles from "./Login.module.css";
 import jwt_decode from "jwt-decode";
-import { WindPower } from "@mui/icons-material";
 import { ThemeBackGround } from "../../Theme/ThemeProvider";
 export default function Login() {
-  const [decoded, setDecode] = useState();
-  const { user } = useContext(ThemeBackGround);
   const [show, setShow] = useState("false");
   const [date, setDate] = useState(new Date().toJSON());
-  // const [isLoading, setIsLoading] = useState(true);
-
-  // const getUser = () => {
-  //   fetch("https://64acf61eb470006a5ec514b7.mockapi.io/movie/account", {
-  //     method: "GET",
-  //     headers: { "content-type": "application/json" },
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       // handle error
-  //     })
-  //     .then((tasks) => {
-  //       // Do something with the list of tasks
-  //       setUser(tasks);
-  //     })
-  //     .catch((error) => {
-  //       // handle error
-  //     });
-  // };
 
   useEffect(() => {
-    // getUser();
     /* global google*/
     window.onload = function () {
       google.accounts.id.initialize({
@@ -53,7 +28,6 @@ export default function Login() {
     console.log("Encoded JWT ID token: " + response.credential);
     var decoded = jwt_decode(response.credential);
     checkUserIsSignedIn(decoded);
-    setDecode(decoded);
   };
 
   const navigate = useNavigate();
@@ -61,7 +35,6 @@ export default function Login() {
   const hanlerShow_disclosure = () => {
     setShow(!show);
   };
-
   const addNewUser = (newUser) => {
     fetch("https://64acf61eb470006a5ec514b7.mockapi.io/movie/account", {
       method: "POST",
@@ -132,32 +105,6 @@ export default function Login() {
       .catch((error) => {
         // handle error
       });
-    // if (userDetail) {
-    // localStorage.setItem("accessToken", true);
-    // localStorage.setItem("email", decodedObj?.email);
-    // localStorage.setItem("name", decodedObj?.name);
-    // localStorage.setItem("images", decodedObj?.picture);
-    // document.getElementById("buttonDiv").hidden = true;
-    // navigate("/admin");
-    // window.location.reload();
-    // } else {
-    // localStorage.setItem("accessToken", true);
-    // localStorage.setItem("email", decodedObj?.email);
-    // localStorage.setItem("name", decodedObj?.name);
-    // localStorage.setItem("images", decodedObj?.picture);
-    // const newUser = {
-    //   fullName: `${decodedObj?.name}`,
-    //   email: `${decodedObj?.email}`,
-    //   avatar: `${decodedObj?.picture}`,
-    //   phone: "null",
-    //   gender: false,
-    //   memberShip: false,
-    //   createdAt: date,
-    //   password: "null",
-    //   expiredDate: "null",
-    // };
-
-    // }
   }
 
   return (

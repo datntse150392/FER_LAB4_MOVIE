@@ -54,6 +54,8 @@ export default function Login() {
       });
   };
 
+  //set localStorage with ID of user are found
+
   function checkUserIsSignedIn(decodedObj) {
     console.log(decodedObj.email);
     fetch(
@@ -70,24 +72,23 @@ export default function Login() {
         // handle error
       })
       .then((tasks) => {
-        // Do something with the list of tasks
-        debugger;
-        console.log(tasks.length);
-        if (tasks.length) {
+        // Do something with the list of tasks - User already exist in api
+        if (tasks.length !== 0) {
           localStorage.setItem("accessToken", true);
           localStorage.setItem("email", decodedObj?.email);
           localStorage.setItem("name", decodedObj?.name);
           localStorage.setItem("images", decodedObj?.picture);
           localStorage.setItem("gender", tasks[0].gender);
           localStorage.setItem("memberShip", tasks[0].memberShip);
-          localStorage.setItem("password", tasks[0].password);
+          localStorage.setItem("phone", tasks[0].phone);
+          CheckExpiredDate();
           document.getElementById("buttonDiv").hidden = true;
           if (decodedObj.email == "datntse150392@fpt.edu.vn") {
             navigate("/admin");
           } else {
             navigate("/film/homePage");
           }
-        } else if (!tasks.length) {
+        } else if (tasks.length === 0) {
           const newUser = {
             fullName: `${decodedObj?.name}`,
             email: `${decodedObj?.email}`,
@@ -106,7 +107,7 @@ export default function Login() {
           localStorage.setItem("images", decodedObj?.picture);
           localStorage.setItem("gender", newUser.gender);
           localStorage.setItem("memberShip", newUser.memberShip);
-          localStorage.setItem("password", newUser.password);
+          localStorage.setItem("phone", newUser.phone);
           navigate("/film/homePage");
         }
         window.location.reload();
@@ -114,6 +115,35 @@ export default function Login() {
       .catch((error) => {
         // handle error
       });
+  }
+
+  async function DisableMemberShipWithID(id) {
+    const res = await fetch(
+      `https://64acf61eb470006a5ec514b7.mockapi.io/movie/account/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ memberShip: false, expiredDate: null }),
+      }
+    );
+    try {
+      const result = res.json();
+      if (result) {
+        localStorage.setItem("memberShip", false);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function CheckExpiredDate(expiredDate, accountID) {
+    let currentDate = new Date().toJSON().slice(0, 10);
+    console.log(currentDate);
+    console.log(expiredDate);
+    if (expiredDate - currentDate >= 0) {
+      DisableMemberShipWithID(accountID);
+    }
   }
 
   // Hanler Login Account Normal

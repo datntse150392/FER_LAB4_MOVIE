@@ -50,6 +50,41 @@ export default function Admin() {
     getFilms();
   }, []);
 
+  React.useMemo(() => {
+    console.log("USE MEMO BEFORE");
+    if (
+      localStorage.getItem("email") != null &&
+      localStorage.getItem("id") == null
+    ) {
+      console.log("USE MEMO");
+      const getAccountID = () => {
+        fetch(
+          "https://64acf61eb470006a5ec514b7.mockapi.io/movie/account?email=" +
+            localStorage.getItem("email"),
+          {
+            method: "GET",
+            headers: { "content-type": "application/json" },
+          }
+        )
+          .then((res) => {
+            if (res.ok) {
+              console.log("Successfully");
+              return res.json();
+            } else {
+              console.log("Fail");
+            }
+          })
+          .then((tasks) => {
+            console.log(tasks[0].id);
+            localStorage.setItem("id", tasks[0].id);
+          })
+          .catch((error) => {
+            console.log("Fail: ", error);
+          });
+      };
+      getAccountID();
+    }
+  }, []);
   const [checked, setChecked] = React.useState(true);
   const handleChange = (event) => {
     setChecked(event.target.checked);

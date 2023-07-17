@@ -33,7 +33,8 @@ export default function AccountMenu() {
     localStorage.removeItem("images");
     localStorage.removeItem("gender");
     localStorage.removeItem("memberShip");
-    localStorage.removeItem("password");
+    localStorage.removeItem("phone");
+    localStorage.removeItem("id");
     navigate("/login");
     window.location.reload();
   };

@@ -23,6 +23,7 @@ import UserProfile from "./pages/UserProfile";
 import WatchFilm from "./pages/WatchFilm";
 import FreeTrial from "./pages/7DayFreeTrial";
 import ManageAccount from "./pages/Admin/ManageAccount";
+import Payment from "./pages/Payment";
 function App() {
   return (
     <div className="App">
@@ -291,6 +292,23 @@ function App() {
             </FilmLayout>
           }
         />
+        <Route
+          path="/pay"
+          element={
+            <FilmLayout>
+              <Payment />
+            </FilmLayout>
+          }
+        >
+          <Route
+            path=":id"
+            element={
+              <FilmLayout>
+                <Payment />
+              </FilmLayout>
+            }
+          />
+        </Route>
       </Routes>
     </div>
   );

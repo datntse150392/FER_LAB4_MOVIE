@@ -1,0 +1,143 @@
+.wrapper-header {
+  text-align: center;
+  max-width: 1050px;
+  margin: 0px auto;
+  padding: 1.5rem 0px 2.25rem;
+}
+
+.wrapper-header .header-title h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 8px 0px 4px;
+}
+
+.line-header {
+  height: 5px;
+  width: 120px;
+  margin: auto;
+  background-color: rgb(10, 117, 255);
+}
+
+.payment-term-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0px 0px 20px;
+}
+
+.payment-duration-title {
+  text-transform: capitalize;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  margin-left: 34px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.main-price {
+  font-size: 18px;
+  text-align: right;
+  font-weight: bold;
+}
+.popular-tag {
+  display: inline-block;
+  margin-left: 10px;
+  color: white;
+  border-radius: 4px;
+  padding: 5px 3px;
+  font-size: 12px;
+  background-color: rgb(10, 117, 255);
+}
+
+.input-package-section {
+  animation: 0.7s ease 0s 1 normal none running fadeIn;
+  min-height: 40px;
+  width: 100%;
+  font-size: 14px;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  box-sizing: initial;
+}
+
+.input-package-content {
+  display: inline-flex;
+  width: 55%;
+}
+
+.payment-duration-title input {
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+  left: -4px;
+  top: -1px;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.package-infor-bottom {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.input-package-content-left {
+  float: right;
+}
+
+.title-watch-on {
+  margin-top: 5px;
+  left: 34px;
+  font-size: 15px;
+  position: relative;
+  color: rgba(169, 170, 173, 0.8);
+  cursor: pointer;
+}
+
+.save-price {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: normal;
+  text-align: right;
+  color: rgb(155, 155, 155);
+  text-decoration: line-through;
+}
+
+#paytime-countdown {
+  color: rgb(10, 117, 255);
+}
+
+.payment-method-item {
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid rgb(192, 196, 201);
+  font-size: 18px;
+  opacity: 0.55;
+  margin-bottom: 10px;
+  margin-right: 15px;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.payment-method-item:hover {
+  border: 2px solid rgb(10, 117, 255);
+  opacity: 1;
+}
+
+.active {
+  border: 2px solid rgb(10, 117, 255);
+  opacity: 1;
+}
+
+.payment-method-item-image {
+  padding: 7px 0px 14px;
+  text-align: center;
+  color: black;
+  margin: 0px 5px;
+  box-sizing: border-box;
+  flex: 0 0 25%;
+  border-radius: 10px;
+  width: 170px;
+  background: white;
+}

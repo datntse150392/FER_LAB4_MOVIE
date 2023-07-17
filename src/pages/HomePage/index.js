@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -288,6 +288,42 @@ export default function HomePage() {
         });
     }
   };
+
+  useMemo(() => {
+    console.log("USE MEMO BEFORE");
+    if (
+      localStorage.getItem("email") != null &&
+      localStorage.getItem("id") == null
+    ) {
+      console.log("USE MEMO");
+      const getAccountID = () => {
+        fetch(
+          "https://64acf61eb470006a5ec514b7.mockapi.io/movie/account?email=" +
+            localStorage.getItem("email"),
+          {
+            method: "GET",
+            headers: { "content-type": "application/json" },
+          }
+        )
+          .then((res) => {
+            if (res.ok) {
+              console.log("Successfully");
+              return res.json();
+            } else {
+              console.log("Fail");
+            }
+          })
+          .then((tasks) => {
+            console.log(tasks[0].id);
+            localStorage.setItem("id", tasks[0].id);
+          })
+          .catch((error) => {
+            console.log("Fail: ", error);
+          });
+      };
+      getAccountID();
+    }
+  }, []);
   return (
     <div className={styles["container-homepage"]}>
       {/* POPUP QC */}
@@ -314,7 +350,7 @@ export default function HomePage() {
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
           {listFilm_billborad_homepage?.map((test, index) => (
-            <div className={styles["billboard-motion"]}>
+            <div className={styles["billboard-motion"]} key={index}>
               <div className={styles["motion-background"]}>
                 {/* <img src={test[0]?.imgBG} /> */}
                 <video
@@ -336,19 +372,21 @@ export default function HomePage() {
                 </div>
                 <div className={styles["action"]}>
                   <Stack style={{ display: "flex" }} direction="row">
-                    <Link to={"#"}>
-                      {localStorage.getItem("email") ? (
+                    {localStorage.getItem("memberShip") === "true" ? (
+                      <Link to={"#"}>
                         <button className={styles["register-btn"]}>
                           <PlayArrowIcon />
                           Xem ngay
                         </button>
-                      ) : (
+                      </Link>
+                    ) : (
+                      <Link to={`/pay/1`}>
                         <button className={styles["register-btn"]}>
                           <PlayArrowIcon />
                           Đăng kí gói
                         </button>
-                      )}
-                    </Link>
+                      </Link>
+                    )}
                     {/* {
                     listFilmFavoriteAPI?.[0]?.listFilm?.map((film, index) => (
                       return 

@@ -22,6 +22,7 @@ import SeriesFilm from "./pages/SeriesFilm";
 import UserProfile from "./pages/UserProfile";
 import WatchFilm from "./pages/WatchFilm";
 import FreeTrial from "./pages/7DayFreeTrial";
+import ManageAccount from "./pages/Admin/ManageAccount";
 function App() {
   return (
     <div className="App">
@@ -60,6 +61,21 @@ function App() {
             localStorage.getItem("email") == "datntse150392@fpt.edu.vn" ? (
               <AdminLayout>
                 <UpdateFilm />
+              </AdminLayout>
+            ) : (
+              <Fragment>
+                <Login />
+              </Fragment>
+            )
+          }
+        />
+        {/* Manage Account */}
+        <Route
+          path="/admin/manageAccount"
+          element={
+            localStorage.getItem("email") == "datntse150392@fpt.edu.vn" ? (
+              <AdminLayout>
+                <ManageAccount />
               </AdminLayout>
             ) : (
               <Fragment>
@@ -235,7 +251,7 @@ function App() {
             </Fragment>
           }
         />
-        {/* Watching Film */}
+        {/* 7 Day Free Trial */}
         {/* {publicRoutes.map((route, index) => {
           let Layout = DefaultLayout;
           console.log(route.layout);

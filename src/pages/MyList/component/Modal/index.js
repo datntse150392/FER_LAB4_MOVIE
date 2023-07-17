@@ -3,6 +3,7 @@ import styles from "./Modal.module.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { useState } from "react";
 const style = {
   position: "absolute",
   top: "50%",
@@ -22,6 +23,38 @@ export default function ModalUI({ Film_detail, open, handleClose }) {
   const convertURL = (url) => {
     return url?.replace("watch?v=", "embed/");
   };
+  const [listFilmFavorite, setListFilmFavorite] = useState();
+
+  // Lấy ra danh sách phim yêu thích theo email hiện tại trên localstorage
+  const getListFavoriteFilm_ByEmalil = () => {
+    const url = new URL(
+      "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList"
+    );
+    url.searchParams.append(
+      "accountEmail",
+      localStorage.getItem("accountEmail")
+    );
+
+    fetch(url, {
+      method: "GET",
+      headers: { "content-type": "application/json" },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        // handle error
+      })
+      .then((tasks) => {
+        setListFilmFavorite(tasks);
+      })
+      .catch((error) => {
+        // handle error
+      });
+  };
+
+  debugger;
+  console.log(listFilmFavorite);
 
   return (
     <div>

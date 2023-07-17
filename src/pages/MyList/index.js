@@ -1,38 +1,47 @@
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useParams } from "react-router-dom";
 import styles from "./MyList.module.css";
 import ModalUI from "./component/Modal";
 
-// const style = {
-//   position: "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-//   width: "70%",
-//   bgcolor: "background.paper",
-//   borderradius: "20px",
-//   boxShadow: 24,
-//   p: 4,
-//   backgroundColor: "#0000009d",
-//   padding: "0px",
-//   borderRadius: "15px",
-//   // minWidth: "90%",
-// };
-
+// GRID
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 export default function MyList() {
-  const [listFilm_myList, setListFilm_myList] = useState();
-  const [listFilm_myList_2, setListFilm_myList_2] = useState();
-  const [listFilm_myList_3, setListFilm_myList_3] = useState();
-
   const [data, setData] = useState();
+
+  // Lấy ra danh sách phim yêu thích theo email hiện tại trên localstorage
+  const [listFilmFavoriteAPI, setListFilmFavoriteAPI] = useState();
+  const getListFavoriteFilm_ByEmalil = () => {
+    fetch(
+      "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList?accountEmail=" +
+        localStorage.getItem("email"),
+      {
+        method: "GET",
+        headers: { "content-type": "application/json" },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        // handle error
+      })
+      .then((tasks) => {
+        // Do something with the list of tasks
+        setListFilmFavoriteAPI(tasks);
+      })
+      .catch((error) => {
+        // handle error
+      });
+  };
 
   // Lọc tất cả các phim có isActive
   const getFilms = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("isActive", true);
+    const url = new URL(
+      "https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie"
+    );
     fetch(url, {
       method: "GET",
       headers: { "content-type": "application/json" },
@@ -51,137 +60,23 @@ export default function MyList() {
         // handle error
       });
   };
-  // Lọc ra những bộ phim mới và Trending page 1 list 6
-  const getListFilm_myList = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("myList", true);
-    url.searchParams.append("isActive", true);
-    url.searchParams.append("page", 1);
-    url.searchParams.append("limit", 6);
-    fetch(url, {
-      method: "GET",
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        // handle error
-      })
-      .then((tasks) => {
-        // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setListFilm_myList(tasks);
-      })
-      .catch((error) => {
-        // handle error
-      });
-  };
-  // Lọc ra những bộ phim mới và Trending page 2 list 6
-  const getListFilm_myList_2 = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("myList", true);
-    url.searchParams.append("isActive", true);
-    url.searchParams.append("page", 2);
-    url.searchParams.append("limit", 6);
-    fetch(url, {
-      method: "GET",
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        // handle error
-      })
-      .then((tasks) => {
-        // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setListFilm_myList_2(tasks);
-      })
-      .catch((error) => {
-        // handle error
-      });
-  };
-  // Lọc ra những bộ phim mới và Trending page 2 list 6
-  const getListFilm_myList_3 = () => {
-    const url = new URL("https://6491295d2f2c7ee6c2c7cfa0.mockapi.io/Films");
-    url.searchParams.append("myList", true);
-    url.searchParams.append("isActive", true);
-    url.searchParams.append("page", 3);
-    url.searchParams.append("limit", 6);
-    fetch(url, {
-      method: "GET",
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        // handle error
-      })
-      .then((tasks) => {
-        // mockapi returns only tasks that match `Phim Hàn Quốc` string
-        setListFilm_myList_3(tasks);
-      })
-      .catch((error) => {
-        // handle error
-      });
-  };
+
   // Lấy ra phim theo ID
   const filmId = useParams();
-
   useEffect(() => {
     getFilms();
-    getListFilm_myList_2();
-    getListFilm_myList();
-    getListFilm_myList_3();
+    getListFavoriteFilm_ByEmalil();
   }, []);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  console.log(listFilmFavoriteAPI);
+  console.log(data);
   //----------------------------------------------------------------//
   const Film_detail = data?.find((obj) => {
     return obj.id === filmId.id;
   });
-
-  //
-
-  // Sẽ phải tách ra thành 1 component riêng và gắn vào như component AVT "MUI MODAL"
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 6,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 380,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
 
   return (
     <div className={styles["container-homepage"]}>
@@ -202,48 +97,30 @@ export default function MyList() {
         >
           Danh sách yêu thích
         </h2>
-        <Slider
-          {...settings}
-          style={{ overflowY: "hidden", marginBottom: "20px" }}
-        >
-          {listFilm_myList?.map((film, index) => (
-            <div className={styles["news"]} key={index}>
-              <div className={styles["news-top"]}>
-                <Link to={`/film/myList/${film.id}`}>
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
-                </Link>
-              </div>
-            </div>
-          ))}
-        </Slider>
-        <Slider
-          {...settings}
-          style={{ overflowY: "hidden", marginBottom: "20px" }}
-        >
-          {listFilm_myList_2?.map((film, index) => (
-            <div className={styles["news"]} key={index}>
-              <div className={styles["news-top"]}>
-                <Link to={`/film/myList/${film.id}`}>
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
-                </Link>
-              </div>
-            </div>
-          ))}
-        </Slider>
-        <Slider
-          {...settings}
-          style={{ overflowY: "hidden", marginBottom: "20px" }}
-        >
-          {listFilm_myList_3?.map((film, index) => (
-            <div className={styles["news"]} key={index}>
-              <div className={styles["news-top"]}>
-                <Link to={`/film/myList/${film.id}`}>
-                  <img src={film.img} alt={film.title} onClick={handleOpen} />
-                </Link>
-              </div>
-            </div>
-          ))}
-        </Slider>
+        <Box sx={{ width: "100%" }}>
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
+            {listFilmFavoriteAPI?.[0]?.listFilm?.map((film, index) => (
+              <Grid item xs={2.4}>
+                <div className={styles["news"]} key={index}>
+                  <div className={styles["news-top"]}>
+                    <Link to={`/film/detailFilm/${film.id}`}>
+                      <img
+                        src={film.img}
+                        alt={film.title}
+                        onClick={handleOpen}
+                      />
+                    </Link>
+                  </div>
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
         {/* Tổng hợp tất cả bộ phim yêu thích */}
       </div>
     </div>

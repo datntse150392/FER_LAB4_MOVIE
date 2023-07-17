@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import { Stack } from "react-bootstrap";
 
@@ -12,8 +12,35 @@ import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const [data, setData] = useState();
   const [test, setTest] = useState();
+
+  // Lấy ra danh sách phim yêu thích theo email hiện tại trên localstorage
+  const [listFilmFavoriteAPI, setListFilmFavoriteAPI] = useState();
+  const getListFavoriteFilm_ByEmalil = () => {
+    fetch(
+      "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList?accountEmail=" +
+        localStorage.getItem("email"),
+      {
+        method: "GET",
+        headers: { "content-type": "application/json" },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        // handle error
+      })
+      .then((tasks) => {
+        // Do something with the list of tasks
+        setListFilmFavoriteAPI(tasks);
+      })
+      .catch((error) => {
+        // handle error
+      });
+  };
 
   // Lọc tất cả các phim có isActive
   const getFilms = () => {
@@ -69,9 +96,7 @@ export default function HomePage() {
   useEffect(() => {
     getFilms();
     getListFilm_Billboard();
-    // getListFilm_Horror();
-    // getListFilm_Anime();
-    // getListFilm_Trending();
+    getListFavoriteFilm_ByEmalil();
   }, []);
 
   //----------------------------------------------------------------//
@@ -183,6 +208,86 @@ export default function HomePage() {
       x.style.display = "none";
     }
   };
+
+  // hanler add my list
+  const hanlerAddMyList = (test) => {
+    if (localStorage.getItem("email") === null) {
+      navigate("/login");
+      window.location.reload();
+    } else {
+      fetch(
+        "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList?accountEmail=" +
+          localStorage.getItem("email"),
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          // handle error
+        })
+        .then((tasks) => {
+          // email co ton tai trong favoriteList
+          if (tasks.length) {
+            const listFilm = tasks[0].listFilm;
+            const newDataListFilm = [...listFilm, test];
+            if (
+              window.confirm(
+                "Bạn chắc chắn muốn thêm phim này vào danh sách yêu thích không?"
+              )
+            ) {
+              fetch(
+                `https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList/${tasks[0].id}`,
+                {
+                  method: "PUT", // or PATCH
+                  headers: { "content-type": "application/json" },
+                  body: JSON.stringify({ listFilm: newDataListFilm }),
+                }
+              )
+                .then(() => {
+                  navigate("/film/homePage");
+                })
+                .catch((err) => {
+                  console.log(err.message);
+                });
+            }
+          } else if (!tasks.lengh) {
+            const newTask = {
+              accountEmail: localStorage.getItem("email"),
+              listFilm: [test],
+            };
+
+            fetch(
+              "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList",
+              {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                // Send your data in the request body as JSON
+                body: JSON.stringify(newTask),
+              }
+            )
+              .then((res) => {
+                if (res.ok) {
+                  return res.json();
+                }
+                // handle error
+              })
+              .then((task) => {
+                // do something with the new task
+              })
+              .catch((error) => {
+                // handle error
+              });
+          }
+        })
+        .catch((error) => {
+          // handle error
+        });
+    }
+  };
   return (
     <div className={styles["container-homepage"]}>
       {/* POPUP QC */}
@@ -232,17 +337,40 @@ export default function HomePage() {
                 <div className={styles["action"]}>
                   <Stack style={{ display: "flex" }} direction="row">
                     <Link to={"#"}>
-                      <button className={styles["register-btn"]}>
-                        <PlayArrowIcon />
-                        Đăng kí gói
-                      </button>
+                      {localStorage.getItem("email") ? (
+                        <button className={styles["register-btn"]}>
+                          <PlayArrowIcon />
+                          Xem ngay
+                        </button>
+                      ) : (
+                        <button className={styles["register-btn"]}>
+                          <PlayArrowIcon />
+                          Đăng kí gói
+                        </button>
+                      )}
                     </Link>
-                    <Link to={"/film/detailFilm/1"}>
-                      <button className={styles["detail-btn"]}>
+                    {/* {
+                    listFilmFavoriteAPI?.[0]?.listFilm?.map((film, index) => (
+                      return 
+                      <button
+                        className={styles["detail-btn"]}
+                        onClick={() => {
+                          hanlerAddMyList(test);
+                        }}
+                      >
                         <BookmarkAddIcon />
                         Thêm vào danh sách
                       </button>
-                    </Link>
+                    ))} */}
+                    <button
+                      className={styles["detail-btn"]}
+                      onClick={() => {
+                        hanlerAddMyList(test);
+                      }}
+                    >
+                      <BookmarkAddIcon />
+                      Thêm vào danh sách
+                    </button>
                   </Stack>
                 </div>
                 <div className={styles["info-wrapper"]}>

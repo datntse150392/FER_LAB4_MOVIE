@@ -55,6 +55,7 @@ export default function Login() {
   };
 
   function checkUserIsSignedIn(decodedObj) {
+    console.log(decodedObj.email);
     fetch(
       `https://64acf61eb470006a5ec514b7.mockapi.io/movie/account?email=${decodedObj.email}`,
       {
@@ -70,24 +71,29 @@ export default function Login() {
       })
       .then((tasks) => {
         // Do something with the list of tasks
-        if (tasks.length !== 0) {
+        debugger;
+        console.log(tasks.length);
+        if (tasks.length) {
           localStorage.setItem("accessToken", true);
           localStorage.setItem("email", decodedObj?.email);
           localStorage.setItem("name", decodedObj?.name);
           localStorage.setItem("images", decodedObj?.picture);
+          localStorage.setItem("gender", tasks[0].gender);
+          localStorage.setItem("memberShip", tasks[0].memberShip);
+          localStorage.setItem("password", tasks[0].password);
           document.getElementById("buttonDiv").hidden = true;
           if (decodedObj.email == "datntse150392@fpt.edu.vn") {
             navigate("/admin");
           } else {
             navigate("/film/homePage");
           }
-        } else {
+        } else if (!tasks.length) {
           const newUser = {
             fullName: `${decodedObj?.name}`,
             email: `${decodedObj?.email}`,
             avatar: `${decodedObj?.picture}`,
             phone: "null",
-            gender: false,
+            gender: "null",
             memberShip: false,
             createdAt: date,
             password: "null",
@@ -98,6 +104,9 @@ export default function Login() {
           localStorage.setItem("email", decodedObj?.email);
           localStorage.setItem("name", decodedObj?.name);
           localStorage.setItem("images", decodedObj?.picture);
+          localStorage.setItem("gender", newUser.gender);
+          localStorage.setItem("memberShip", newUser.memberShip);
+          localStorage.setItem("password", newUser.password);
           navigate("/film/homePage");
         }
         window.location.reload();
@@ -106,6 +115,17 @@ export default function Login() {
         // handle error
       });
   }
+
+  // Hanler Login Account Normal
+  const [account, setAccount] = useState({
+    email: "",
+    password: "",
+  });
+
+  console.log(account);
+  const hanlerLoginAccount = () => {
+    console.log(account);
+  };
 
   return (
     <div className={styles["login-container"]}>
@@ -119,16 +139,31 @@ export default function Login() {
       <div className={styles["login-content"]}>
         <div className={styles["login-content-top"]}>
           <h1>Đăng nhập</h1>
-          <form className={styles["login-form"]}>
+          <form
+            onSubmit={hanlerLoginAccount()}
+            className={styles["login-form"]}
+          >
             <input
               type="text"
               placeholder="Email hoặc số điện thoại"
               className={styles["login-input-email"]}
+              onChange={(e) =>
+                setAccount((prev) => ({
+                  ...prev,
+                  email: e.target.value,
+                }))
+              }
             />
             <input
               type="password"
               placeholder="Mật khẩu"
               className={styles["login-input-password"]}
+              onChange={(e) =>
+                setAccount((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }))
+              }
             />
             <buttom className={styles["login-content-btn"]}>Đăng nhập</buttom>
             <h4

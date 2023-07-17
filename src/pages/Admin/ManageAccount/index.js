@@ -1,5 +1,4 @@
 import * as React from "react";
-import useFetch from "react-hook-usefetch";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,7 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
-import { deleteFilmbyid } from "../../api/film";
 import Switch from "@mui/material/Switch";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -24,11 +22,11 @@ import Box from "@mui/material/Box";
 
 // Pagination
 
-export default function Admin() {
+export default function ManageAccount() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState();
-  const getFilms = () => {
-    fetch("https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie", {
+  const getAccount = () => {
+    fetch("https://64acf61eb470006a5ec514b7.mockapi.io/movie/account", {
       method: "GET",
       headers: { "content-type": "application/json" },
     })
@@ -47,7 +45,7 @@ export default function Admin() {
       });
   };
   useEffect(() => {
-    getFilms();
+    getAccount();
   }, []);
 
   const [checked, setChecked] = React.useState(true);
@@ -83,15 +81,13 @@ export default function Admin() {
           <TableHead>
             <TableRow>
               <TableCell align="left">ID</TableCell>
-              <TableCell sx={{ width: "300px" }} align="left">
-                Tên phim
-              </TableCell>
+              <TableCell align="left">Họ và tên</TableCell>
               <TableCell align="left">Hình ảnh</TableCell>
-              <TableCell align="left">Thể loại</TableCell>
-              <TableCell align="left">Tác giả</TableCell>
-              <TableCell align="left">Trạng thái</TableCell>
-              <TableCell align="left">Quảng cáo</TableCell>
-              <TableCell align="left">Bật/Tắt Phim</TableCell>
+              <TableCell align="left">Số điện thoại</TableCell>
+              <TableCell align="left">Giới tính</TableCell>
+              <TableCell align="left">Thành viên</TableCell>
+              <TableCell align="left">Thời hạn gói</TableCell>
+              <TableCell align="left">Bật/Tắt Thành viên</TableCell>
               <TableCell align="left">Chức năng</TableCell>
             </TableRow>
           </TableHead>
@@ -99,42 +95,49 @@ export default function Admin() {
             {data?.map((data, index) => (
               <TableRow hover role="checkbox" tabIndex={-1} key={data.id}>
                 <TableCell align="left">{data.id}</TableCell>
-                <TableCell align="left">{data.title}</TableCell>
+                <TableCell align="left">{data.fullName}</TableCell>
                 <TableCell align="left">
                   <img
-                    style={{ width: "150px", borderRadius: "10px" }}
-                    src={data.img}
+                    style={{ width: "100px", borderRadius: "10px" }}
+                    src={data.avatar}
                   />
                 </TableCell>
                 <TableCell sx={{ width: "140px" }} align="left">
-                  {data.type}
+                  {data.phone === true ? "..." : "Đang cập nhật"}
                 </TableCell>
-                <TableCell sx={{ width: "200px" }} align="left">
-                  {data.director}
+                <TableCell align="left">
+                  {data.gender === true ? "Nam" : "Nữ"}
                 </TableCell>
-                <TableCell align="left">{data.tag}</TableCell>
+                <TableCell align="left">
+                  {data.memberShip === true
+                    ? "Đã đăng kí "
+                    : "Chưa đăng kí gói"}
+                </TableCell>
+                <TableCell align="left">
+                  {data.expiredDate === true ? "..." : "Thời gian chưa có"}
+                </TableCell>
                 <TableCell align="left">
                   <Switch
-                    checked={data.billboard}
+                    checked={data.memberShip}
                     onChange={(e) => {
                       e.preventDefault();
                       if (
                         window.confirm(
-                          "Bạn chắc chắn muốn thay đổi trạng thái quảng cáo cho phim này không?"
+                          "Bạn chắc chắn muốn thay đổi trạng thái thành viên này không?"
                         )
                       ) {
                         fetch(
-                          `https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie/${data.id}`,
+                          `https://64acf61eb470006a5ec514b7.mockapi.io/movie/account/${data.id}`,
                           {
                             method: "PUT", // or PATCH
                             headers: { "content-type": "application/json" },
                             body: JSON.stringify({
-                              billboard: !data.billboard,
+                              memberShip: !data.memberShip,
                             }),
                           }
                         )
                           .then(() => {
-                            getFilms();
+                            getAccount();
                             setOpen(true);
                             const { scrollTop, scrollHeight, clientHeight } =
                               document.documentElement;
@@ -153,53 +156,6 @@ export default function Admin() {
                   />
                 </TableCell>
                 <TableCell align="left">
-                  <Switch
-                    checked={data.isActive}
-                    onChange={(e) => {
-                      e.preventDefault();
-                      if (
-                        window.confirm(
-                          "Bạn chắc chắn muốn thay đổi trạng thái cho phim này không?"
-                        )
-                      ) {
-                        fetch(
-                          `https://64acf61eb470006a5ec514b7.mockapi.io/movie/movie/${data.id}`,
-                          {
-                            method: "PUT", // or PATCH
-                            headers: { "content-type": "application/json" },
-                            body: JSON.stringify({
-                              isActive: !data.isActive,
-                            }),
-                          }
-                        )
-                          .then(() => {
-                            getFilms();
-                            setOpen(true);
-                            const { scrollTop, scrollHeight, clientHeight } =
-                              document.documentElement;
-                            const topPosition = 0;
-                            window.scrollTo({
-                              top: topPosition,
-                              behavior: "smooth",
-                            });
-                          })
-                          .catch((err) => {
-                            console.log(err.message);
-                          });
-                      }
-                    }}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </TableCell>
-                <TableCell align="left">
-                  <IconButton
-                    onClick={() => {
-                      deleteFilmbyid(data.id);
-                    }}
-                    aria-label="delete"
-                  >
-                    <DeleteIcon sx={{ color: "red" }} />
-                  </IconButton>
                   <IconButton>
                     <Link to={`/admin/updateFilm/${data.id}`}>
                       <EditIcon sx={{ color: "black" }} />

@@ -16,7 +16,7 @@ export default function HeaderForAdminLayout() {
           <Link to="/admin">Phim</Link>
         </li>
         <li style={{ fontWeight: "bold" }}>
-          <Link to="#">Tài khoản</Link>
+          <Link to="/admin/manageAccount">Tài khoản</Link>
         </li>
         <li style={{ fontWeight: "bold" }}>
           <Link to="#">Doanh thu</Link>

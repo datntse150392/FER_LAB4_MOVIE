@@ -31,6 +31,9 @@ export default function AccountMenu() {
     localStorage.removeItem("name");
     localStorage.removeItem("email");
     localStorage.removeItem("images");
+    localStorage.removeItem("gender");
+    localStorage.removeItem("memberShip");
+    localStorage.removeItem("password");
     navigate("/login");
     window.location.reload();
   };

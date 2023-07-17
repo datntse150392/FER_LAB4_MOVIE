@@ -157,6 +157,7 @@
 }
 
 .slider-content {
+  margin: 30px;
   position: absolute;
   top: 15%;
   width: 100%;

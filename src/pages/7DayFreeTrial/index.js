@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import styles from "./7DayFreeTrial.module.css";
+
+// Icon
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { Link } from "react-router-dom";
+
 export default function FreeTrial() {
+  const form = useRef();
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_11i8e1d",
+        "template_jo6fg9n",
+        form.current,
+        "vUiAiHknv5qCkvwlT"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    e.target.reset();
+  };
   return (
     <div className={styles["svod-trial-7day"]}>
+      <Link to="/film/homePage">
+        <div className={styles["btn-back"]}>
+          <ArrowBackIosIcon fontSize="large" />
+        </div>
+      </Link>
       <div className={styles["content-body"]}>
         <div className={styles["img-left"]}>
           <div className={styles["video-ytb-wrapper"]}>
@@ -28,18 +60,25 @@ export default function FreeTrial() {
               className={styles["img-info"]}
             />
             <p className={styles["note-input"]}>
-              Vui lòng nhập số điện thoại và nhấn nút "Tiếp tục"
+              Vui lòng nhập số email và nhấn nút "Tiếp tục"
             </p>
             <div className={styles["form"]}>
-              <form>
+              <form ref={form} onSubmit={sendEmail}>
                 <input
+                  name="email"
                   id="input1"
-                  placeholder="Nhập số điện thoại"
+                  placeholder="Nhập email để đăng kí tham gia chương trình"
                   type="tel"
                   className={styles["input-number"]}
                 />
                 <p className={styles["error-message"]}></p>
-                <button className={styles["btn-submit"]}>Tiếp tục</button>
+                <button
+                  type="submit"
+                  value="Send"
+                  className={styles["btn-submit"]}
+                >
+                  Tiếp tục
+                </button>
               </form>
               {/* <p className={styles["note-footer text-center"]}>
                 <b>Lưu ý</b>

@@ -162,14 +162,14 @@
 
 .info-wrapper {
   overflow: hidden;
-  width: 630px;
+  width: 650px;
   height: 100%;
 }
 
 .info-wrapper p {
   color: #f8f9fa;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 400;
   line-height: 24px;
   margin-top: 0.1vw;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
@@ -197,11 +197,32 @@
   display: flex;
 }
 
+.play-btn {
+  cursor: pointer;
+  border: none;
+  width: 150px;
+  height: 42px;
+  border-radius: 43.75px;
+  background-color: #12a7ff;
+  border-color: #12a7ff;
+  border-style: solid;
+  color: #000;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 21px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .register-btn {
   cursor: pointer;
   border: none;
   width: 150px;
-  height: 48px;
+  height: 42px;
   border-radius: 43.75px;
   background-color: #ffffff;
   border-color: #dde2e5;
@@ -222,7 +243,7 @@
   cursor: pointer;
   border: none;
   width: 200px;
-  height: 48px;
+  height: 42px;
   border-radius: 43.75px;
   background-color: #404446;
   border-color: #ffffff;
@@ -276,14 +297,16 @@
 
 .news-top img {
   height: 100%;
+  transition: transform 1s cubic-bezier(0.5, 0, 0.1, 1) 0s;
   border-radius: 5px;
   width: 100%;
   object-fit: fill;
 }
-.news-top:hover {
+
+.news-top :hover {
   position: relative;
-  transform: scale(1.5);
-  transition: transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+  transition: transform 1s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+  transform: scale(0.85);
   border-radius: 10px;
 }
 

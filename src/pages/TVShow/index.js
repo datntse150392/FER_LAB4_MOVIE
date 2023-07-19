@@ -1,18 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./TVShow.module.css";
 import { Stack } from "react-bootstrap";
 
 // Icon
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 
 export default function TVShow() {
+  const navigate = useNavigate();
   const [data, setData] = useState();
   const [test, setTest] = useState();
+
+  // Lấy ra danh sách phim yêu thích theo email hiện tại trên localstorage
+  const [listFilmFavoriteAPI, setListFilmFavoriteAPI] = useState();
+  const getListFavoriteFilm_ByEmalil = () => {
+    fetch(
+      "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList?accountEmail=" +
+        localStorage.getItem("email"),
+      {
+        method: "GET",
+        headers: { "content-type": "application/json" },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        // handle error
+      })
+      .then((tasks) => {
+        // Do something with the list of tasks
+        setListFilmFavoriteAPI(tasks);
+      })
+      .catch((error) => {
+        // handle error
+      });
+  };
 
   // Lọc tất cả các phim có isActive
   const getFilms = () => {
@@ -31,6 +59,7 @@ export default function TVShow() {
         // handle error
       })
       .then((tasks) => {
+        // mockapi returns only tasks that match `Phim Hàn Quốc` string
         setData(tasks);
       })
       .catch((error) => {
@@ -67,22 +96,20 @@ export default function TVShow() {
   useEffect(() => {
     getFilms();
     getListFilm_Billboard();
+    getListFavoriteFilm_ByEmalil();
   }, []);
 
   //----------------------------------------------------------------//
-  const Film_detail = data?.find((obj) => {
-    return obj.id === filmId.id;
-  });
-
-  // Lọc ra tất cả PHIM  hiện có đang trending
+  // Lọc ra tất cả TVSHOW hiện có đang trending
   const listFilm_TVShow_trending = data?.filter((obj) => {
     return obj.tag === "Xu hướng" && obj.type === "TV Show";
   });
 
-  // Lọc ra tất cả Phim hành động hiện có
+  // Lọc ra tất cả TVShow hiện có
   const listFilm_TVShow = data?.filter((obj) => {
     return obj.type === "TV Show";
   });
+
   // Lọc ra những TVShow có quảng cáo
   const listFilm_billborad_TVShow = test?.filter((obj) => {
     return obj.type === "TV Show";
@@ -159,6 +186,187 @@ export default function TVShow() {
     ],
   };
 
+  // hanler add my list
+  const hanlerAddMyList = (test) => {
+    if (localStorage.getItem("email") === null) {
+      navigate("/login");
+      window.location.reload();
+    } else {
+      fetch(
+        "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList?accountEmail=" +
+          localStorage.getItem("email"),
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          // handle error
+        })
+        .then((tasks) => {
+          // email co ton tai trong favoriteList
+          if (tasks.length) {
+            const listFilm = tasks[0].listFilm;
+            const newDataListFilm = [...listFilm, test];
+            if (
+              window.confirm(
+                "Bạn chắc chắn muốn thêm phim này vào danh sách yêu thích không?"
+              )
+            ) {
+              fetch(
+                `https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList/${tasks[0].id}`,
+                {
+                  method: "PUT", // or PATCH
+                  headers: { "content-type": "application/json" },
+                  body: JSON.stringify({ listFilm: newDataListFilm }),
+                }
+              )
+                .then(() => {
+                  getListFavoriteFilm_ByEmalil();
+                  navigate("/film/tvShow");
+                })
+                .catch((err) => {
+                  console.log(err.message);
+                });
+            }
+          } else if (!tasks.lengh) {
+            if (
+              window.confirm(
+                "Bạn chắc chắn muốn thêm phim này vào danh sách yêu thích không?"
+              )
+            ) {
+              const newTask = {
+                accountEmail: localStorage.getItem("email"),
+                listFilm: [test],
+              };
+
+              fetch(
+                "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList",
+                {
+                  method: "POST",
+                  headers: { "content-type": "application/json" },
+                  // Send your data in the request body as JSON
+                  body: JSON.stringify(newTask),
+                }
+              )
+                .then((res) => {
+                  if (res.ok) {
+                    return res.json();
+                  }
+                  // handle error
+                })
+                .then((task) => {
+                  // do something with the new task
+                  getListFavoriteFilm_ByEmalil();
+                  navigate("/film/tvShow");
+                })
+                .catch((error) => {
+                  // handle error
+                });
+            }
+          }
+        })
+        .catch((error) => {
+          // handle error
+        });
+    }
+  };
+
+  // hanlerRemovelist
+  const hanlerRemovelist = (test) => {
+    if (localStorage.getItem("email") === null) {
+      navigate("/login");
+      window.location.reload();
+    } else {
+      fetch(
+        "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList?accountEmail=" +
+          localStorage.getItem("email"),
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          // handle error
+        })
+        .then((tasks) => {
+          // email co ton tai trong favoriteList
+          const listFilm = tasks[0].listFilm;
+          console.log(listFilm);
+          const newDataListFilm = listFilm.filter(
+            (film) => film?.id !== test?.id
+          );
+          debugger;
+          console.log(newDataListFilm);
+          if (
+            window.confirm(
+              "Bạn chắc chắn muốn gỡ phim này khỏi danh sách yêu thích không?"
+            )
+          ) {
+            fetch(
+              `https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList/${tasks[0].id}`,
+              {
+                method: "PUT", // or PATCH
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({ listFilm: newDataListFilm }),
+              }
+            )
+              .then(() => {
+                getListFavoriteFilm_ByEmalil();
+                navigate("/film/tvShow");
+              })
+              .catch((err) => {
+                console.log(err.message);
+              });
+          }
+        })
+        .catch((error) => {
+          // handle error
+        });
+    }
+  };
+
+  useMemo(() => {
+    console.log("USE MEMO BEFORE");
+    if (
+      localStorage.getItem("email") != null &&
+      localStorage.getItem("id") == null
+    ) {
+      console.log("USE MEMO");
+      const getAccountID = () => {
+        fetch(
+          "https://64acf61eb470006a5ec514b7.mockapi.io/movie/account?email=" +
+            localStorage.getItem("email"),
+          {
+            method: "GET",
+            headers: { "content-type": "application/json" },
+          }
+        )
+          .then((res) => {
+            if (res.ok) {
+              console.log("Successfully");
+              return res.json();
+            } else {
+              console.log("Fail");
+            }
+          })
+          .then((tasks) => {
+            console.log(tasks[0].id);
+            localStorage.setItem("id", tasks[0].id);
+          })
+          .catch((error) => {
+            console.log("Fail: ", error);
+          });
+      };
+      getAccountID();
+    }
+  }, []);
   return (
     <div className={styles["container-homepage"]}>
       {/* SHOW BILLBOARD  */}
@@ -168,7 +376,7 @@ export default function TVShow() {
           style={{ overflowY: "hidden", marginBottom: "20px" }}
         >
           {listFilm_billborad_TVShow?.map((test, index) => (
-            <div className={styles["billboard-motion"]}>
+            <div className={styles["billboard-motion"]} key={index}>
               <div className={styles["motion-background"]}>
                 {/* <img src={test[0]?.imgBG} /> */}
                 <video
@@ -190,18 +398,44 @@ export default function TVShow() {
                 </div>
                 <div className={styles["action"]}>
                   <Stack style={{ display: "flex" }} direction="row">
-                    <Link to={"#"}>
-                      <button className={styles["register-btn"]}>
-                        <PlayArrowIcon />
-                        Đăng kí gói
+                    {localStorage.getItem("memberShip") === "true" ? (
+                      <Link to={`/film/WatchFilm/${test?.id}`}>
+                        <button className={styles["play-btn"]}>
+                          <PlayArrowIcon />
+                          &nbsp; Xem ngay
+                        </button>
+                      </Link>
+                    ) : (
+                      <Link to={`/pay/1`}>
+                        <button className={styles["register-btn"]}>
+                          <PlayArrowIcon />
+                          Đăng kí gói
+                        </button>
+                      </Link>
+                    )}
+                    {listFilmFavoriteAPI?.[0]?.listFilm?.some((film) => {
+                      return film?.id === test?.id;
+                    }) ? (
+                      <button
+                        className={styles["detail-btn"]}
+                        onClick={() => {
+                          hanlerRemovelist(test);
+                        }}
+                      >
+                        <BookmarkRemoveIcon />
+                        Gỡ khỏi danh sách
                       </button>
-                    </Link>
-                    <Link to={"/film/detailFilm/1"}>
-                      <button className={styles["detail-btn"]}>
+                    ) : (
+                      <button
+                        className={styles["detail-btn"]}
+                        onClick={() => {
+                          hanlerAddMyList(test);
+                        }}
+                      >
                         <BookmarkAddIcon />
                         Thêm vào danh sách
                       </button>
-                    </Link>
+                    )}
                   </Stack>
                 </div>
                 <div className={styles["info-wrapper"]}>
@@ -222,7 +456,7 @@ export default function TVShow() {
       )}
       {/* SHOW BILLBOARD */}
       <div className={styles["slider-content"]}>
-        {/* Tổng hợp tất cả bộ phim hiện đang thịnh hành*/}
+        {/* Tổng hợp tất cả bộ TVShow hiện đang thịnh hành*/}
         <h2
           style={{ color: "white" }}
           className={styles["container-news-title"]}
@@ -243,9 +477,9 @@ export default function TVShow() {
             </div>
           ))}
         </Slider>
-        {/* Tổng hợp tất cả bộ phim thịnh hành */}
+        {/* Tổng hợp tất cả bộ TVShow hiện đang thịnh hành*/}
 
-        {/* Tổng hợp tất cả bộ Phim Cổ Trang Huyền Huyễn hiện có */}
+        {/* Tổng hợp tất cả TVShow hiện có */}
         <h2
           style={{ color: "white" }}
           className={styles["container-news-title"]}
@@ -266,7 +500,13 @@ export default function TVShow() {
             </div>
           ))}
         </Slider>
-        {/*  Tổng hợp tất cả bộ  phim hành động hiện có */}
+        {/* Tổng hợp tất cả TVShow hiện có */}
+
+        {/* QC */}
+        <div className={styles["style__RatioImage"]}>
+          <img src="https://assets.glxplay.io/images/w1264/83d20b440fb4f058f55413a93b049f00.jpg" />
+        </div>
+        {/* QC */}
       </div>
     </div>
   );

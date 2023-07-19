@@ -103,10 +103,10 @@ export default function ManageAccount() {
                   />
                 </TableCell>
                 <TableCell sx={{ width: "140px" }} align="left">
-                  {data.phone === true ? "..." : "Đang cập nhật"}
+                  {data.phone !== "null" ? data.phone : "Đang cập nhật"}
                 </TableCell>
                 <TableCell align="left">
-                  {data.gender === true ? "Nam" : "Nữ"}
+                  {data.gender === "male" ? "Nam" : "Nữ"}
                 </TableCell>
                 <TableCell align="left">
                   {data.memberShip === true
@@ -114,7 +114,9 @@ export default function ManageAccount() {
                     : "Chưa đăng kí gói"}
                 </TableCell>
                 <TableCell align="left">
-                  {data.expiredDate === true ? "..." : "Thời gian chưa có"}
+                  {data.expiredDate === "null"
+                    ? "Hiện tại chưa có"
+                    : data.expiredDate}
                 </TableCell>
                 <TableCell align="left">
                   <Switch

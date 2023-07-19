@@ -40,10 +40,32 @@
   display: flex;
   flex-direction: row;
 }
+
+.play-btn {
+  border: none;
+  width: 150px;
+  height: 42px;
+  border-radius: 43.75px;
+  background-color: #12a7ff;
+  border-color: #12a7ff;
+  border-style: solid;
+  color: #000;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 21px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .register-btn {
   border: none;
   width: 150px;
-  height: 48px;
+  height: 42px;
   border-radius: 43.75px;
   background-color: #ffffff;
   border-color: #dde2e5;
@@ -63,8 +85,8 @@
 
 .detail-btn {
   border: none;
-  width: 50px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background-color: #9ca1a3;
   border-color: #cccccc;

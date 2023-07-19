@@ -101,10 +101,10 @@ export default function MyList() {
           <Grid
             container
             rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            columnSpacing={{ xs: 1, sm: 2, md: 0 }}
           >
             {listFilmFavoriteAPI?.[0]?.listFilm?.map((film, index) => (
-              <Grid item xs={2.4}>
+              <Grid item xs={2}>
                 <div className={styles["news"]} key={index}>
                   <div className={styles["news-top"]}>
                     <Link to={`/film/detailFilm/${film.id}`}>

@@ -10,6 +10,8 @@ import { Stack } from "react-bootstrap";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import CancelIcon from "@mui/icons-material/Cancel";
+import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
+import DiamondIcon from "@mui/icons-material/Diamond";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -248,6 +250,7 @@ export default function HomePage() {
                 }
               )
                 .then(() => {
+                  getListFavoriteFilm_ByEmalil();
                   navigate("/film/homePage");
                 })
                 .catch((err) => {
@@ -255,31 +258,96 @@ export default function HomePage() {
                 });
             }
           } else if (!tasks.lengh) {
-            const newTask = {
-              accountEmail: localStorage.getItem("email"),
-              listFilm: [test],
-            };
+            if (
+              window.confirm(
+                "Bạn chắc chắn muốn thêm phim này vào danh sách yêu thích không?"
+              )
+            ) {
+              const newTask = {
+                accountEmail: localStorage.getItem("email"),
+                listFilm: [test],
+              };
 
+              fetch(
+                "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList",
+                {
+                  method: "POST",
+                  headers: { "content-type": "application/json" },
+                  // Send your data in the request body as JSON
+                  body: JSON.stringify(newTask),
+                }
+              )
+                .then((res) => {
+                  if (res.ok) {
+                    return res.json();
+                  }
+                  // handle error
+                })
+                .then((task) => {
+                  // do something with the new task
+                  getListFavoriteFilm_ByEmalil();
+                  navigate("/film/homePage");
+                })
+                .catch((error) => {
+                  // handle error
+                });
+            }
+          }
+        })
+        .catch((error) => {
+          // handle error
+        });
+    }
+  };
+
+  // hanlerRemovelist
+  const hanlerRemovelist = (test) => {
+    if (localStorage.getItem("email") === null) {
+      navigate("/login");
+      window.location.reload();
+    } else {
+      fetch(
+        "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList?accountEmail=" +
+          localStorage.getItem("email"),
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          // handle error
+        })
+        .then((tasks) => {
+          // email co ton tai trong favoriteList
+          const listFilm = tasks[0].listFilm;
+          console.log(listFilm);
+          const newDataListFilm = listFilm.filter(
+            (film) => film?.id !== test?.id
+          );
+          debugger;
+          console.log(newDataListFilm);
+          if (
+            window.confirm(
+              "Bạn chắc chắn muốn gỡ phim này khỏi danh sách yêu thích không?"
+            )
+          ) {
             fetch(
-              "https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList",
+              `https://64acf61eb470006a5ec514b7.mockapi.io/movie/favoriteList/${tasks[0].id}`,
               {
-                method: "POST",
+                method: "PUT", // or PATCH
                 headers: { "content-type": "application/json" },
-                // Send your data in the request body as JSON
-                body: JSON.stringify(newTask),
+                body: JSON.stringify({ listFilm: newDataListFilm }),
               }
             )
-              .then((res) => {
-                if (res.ok) {
-                  return res.json();
-                }
-                // handle error
+              .then(() => {
+                getListFavoriteFilm_ByEmalil();
+                navigate("/film/homePage");
               })
-              .then((task) => {
-                // do something with the new task
-              })
-              .catch((error) => {
-                // handle error
+              .catch((err) => {
+                console.log(err.message);
               });
           }
         })
@@ -373,23 +441,33 @@ export default function HomePage() {
                 <div className={styles["action"]}>
                   <Stack style={{ display: "flex" }} direction="row">
                     {localStorage.getItem("memberShip") === "true" ? (
-                      <Link to={"#"}>
-                        <button className={styles["register-btn"]}>
+                      <Link to={`/film/WatchFilm/${test?.id}`}>
+                        <button className={styles["play-btn"]}>
                           <PlayArrowIcon />
-                          Xem ngay
+                          &nbsp; Xem ngay
                         </button>
                       </Link>
                     ) : (
                       <Link to={`/pay/1`}>
                         <button className={styles["register-btn"]}>
-                          <PlayArrowIcon />
-                          Đăng kí gói
+                          <DiamondIcon />
+                          &nbsp; Đăng kí gói
                         </button>
                       </Link>
                     )}
-                    {/* {
-                    listFilmFavoriteAPI?.[0]?.listFilm?.map((film, index) => (
-                      return 
+                    {listFilmFavoriteAPI?.[0]?.listFilm?.some((film) => {
+                      return film?.id === test?.id;
+                    }) ? (
+                      <button
+                        className={styles["detail-btn"]}
+                        onClick={() => {
+                          hanlerRemovelist(test);
+                        }}
+                      >
+                        <BookmarkRemoveIcon />
+                        &nbsp; Gỡ khỏi danh sách
+                      </button>
+                    ) : (
                       <button
                         className={styles["detail-btn"]}
                         onClick={() => {
@@ -397,27 +475,17 @@ export default function HomePage() {
                         }}
                       >
                         <BookmarkAddIcon />
-                        Thêm vào danh sách
+                        &nbsp; Thêm vào danh sách
                       </button>
-                    ))} */}
-                    <button
-                      className={styles["detail-btn"]}
-                      onClick={() => {
-                        hanlerAddMyList(test);
-                      }}
-                    >
-                      <BookmarkAddIcon />
-                      Thêm vào danh sách
-                    </button>
+                    )}
                   </Stack>
                 </div>
                 <div className={styles["info-wrapper"]}>
                   <Stack style={{ display: "flex" }} direction="row">
                     <p>
                       {test?.description}
-                      &nbsp; &nbsp;
                       <Link to={`/film/detailFilm/${test?.id}`}>
-                        Xem chi tiết
+                        &nbsp; Xem chi tiết
                       </Link>
                     </p>
                   </Stack>
@@ -477,7 +545,9 @@ export default function HomePage() {
 
         {/* QC */}
         <div className={styles["style__RatioImage"]}>
-          <img src="https://assets.glxplay.io/images/w1264/83d20b440fb4f058f55413a93b049f00.jpg" />
+          <Link to="/7dayfreetrial">
+            <img src="https://assets.glxplay.io/images/w1264/83d20b440fb4f058f55413a93b049f00.jpg" />
+          </Link>
         </div>
         {/* QC */}
 

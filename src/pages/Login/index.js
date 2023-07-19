@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { images } from "../../assets/images";
 import styles from "./Login.module.css";
 import jwt_decode from "jwt-decode";
-import { ThemeBackGround } from "../../Theme/ThemeProvider";
 export default function Login() {
   const [show, setShow] = useState("false");
   const [date, setDate] = useState(new Date().toJSON());

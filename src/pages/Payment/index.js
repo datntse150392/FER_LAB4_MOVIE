@@ -33,6 +33,7 @@ export default function Payment() {
   const [open, setOpen] = useState(false);
   const [isPaypal, setPaypal] = useState(false);
   const PackageID = useParams();
+  console.log("Packaged ID: ", PackageID);
   const navigate = useNavigate();
   //Create and Format currentDate
   var currentDate = new Date(Date.now());
@@ -41,6 +42,7 @@ export default function Payment() {
   //PopUp finish
   const handleCloseFinish = () => {
     setIsFinish(false);
+    navigate("/film/homePage");
   };
 
   //Expire Date
@@ -220,13 +222,13 @@ export default function Payment() {
 
           var filtered = data.data.records.filter((record) => {
             return record.description.includes(
-              sessionStorage.getItem("specialNum")
-              
+              // sessionStorage.getItem("specialNum")
+              39709
             );
           });
           if (filtered.length !== 0) {
             setIsFinish(true);
-            
+
             handlePaymentSubmit_Qr(filtered[0]);
             sessionStorage.removeItem("specialNum");
             clearInterval(intervalID);
@@ -281,7 +283,6 @@ export default function Payment() {
       },
       currencyCode: "VND",
     };
-    console.log("Im the data return to mockAPI",data)
     try {
       const res = await fetch(
         "https://64acf61eb470006a5ec514b7.mockapi.io/movie/payment",
@@ -383,6 +384,7 @@ export default function Payment() {
                       value={2}
                       onChange={handleOnChange}
                       id="label1"
+                      checked={Package.id === "2" ? true : false}
                     />
                     <div className="checkmark"></div>
                     <div className="package-infor-bottom">
@@ -412,6 +414,7 @@ export default function Payment() {
                       value={3}
                       onChange={handleOnChange}
                       id="label2"
+                      checked={Package.id === "3" ? true : false}
                     />
                     <div className="checkmark"></div>
                     <div className="package-infor-bottom">
@@ -441,6 +444,7 @@ export default function Payment() {
                       value={4}
                       onChange={handleOnChange}
                       id="label3"
+                      checked={Package.id === "4" ? true : false}
                     />
                     <div className="checkmark"></div>
                     <div className="package-infor-bottom">

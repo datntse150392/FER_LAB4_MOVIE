@@ -16,7 +16,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate, redirect, Link } from "react-router-dom";
 export default function AccountMenu() {
   const navigate = useNavigate();
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -35,6 +34,8 @@ export default function AccountMenu() {
     localStorage.removeItem("memberShip");
     localStorage.removeItem("phone");
     localStorage.removeItem("id");
+    localStorage.removeItem("password");
+    localStorage.removeItem("_paypal_storage_");
     navigate("/login");
     window.location.reload();
   };

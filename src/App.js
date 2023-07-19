@@ -37,7 +37,7 @@ function App() {
               </AdminLayout>
             ) : (
               <FilmLayout>
-                <HomePage />
+                <Login />
               </FilmLayout>
             )
           }
@@ -88,15 +88,15 @@ function App() {
         <Route
           path="/login"
           element={
-            localStorage.getItem("accessToken") ? (
-              <AdminLayout>
-                <Admin />
-              </AdminLayout>
-            ) : (
-              <Fragment>
-                <Login />
-              </Fragment>
-            )
+            // localStorage.getItem("accessToken") ? (
+            //   <AdminLayout>
+            //     <Admin />
+            //   </AdminLayout>
+            // ) : (
+            <Fragment>
+              <Login />
+            </Fragment>
+            // )
           }
         />
         <Route
@@ -235,7 +235,7 @@ function App() {
         {/* Trailer Film */}
         {/* Watching Film */}
         <Route
-          path="/film/WatchFilm"
+          path="/film/WatchFilm/:id"
           element={
             <Fragment>
               <WatchFilm />
@@ -295,9 +295,15 @@ function App() {
         <Route
           path="/pay"
           element={
-            <FilmLayout>
-              <Payment />
-            </FilmLayout>
+            localStorage.getItem("accessToken") ? (
+              <FilmLayout>
+                <Payment />
+              </FilmLayout>
+            ) : (
+              <Fragment>
+                <Login />
+              </Fragment>
+            )
           }
         >
           <Route

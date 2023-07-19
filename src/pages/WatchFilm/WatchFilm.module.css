@@ -1,10 +1,20 @@
 .motion-background {
+  position: relative;
   overflow: hidden;
   z-index: 0;
-  height: 757px;
+  height: 789px;
   object-fit: cover;
 }
 
 .motion-background video {
+  position: absolute;
   object-fit: cover;
+}
+
+.btn-back {
+  z-index: 1;
+  position: absolute;
+  color: #fff;
+  margin-top: 3%;
+  margin-left: 5%;
 }

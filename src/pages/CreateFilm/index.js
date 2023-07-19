@@ -130,6 +130,7 @@ export default function CreateFilm() {
                       <MenuItem value={"Cổ trang"}>Phim Cổ Trang</MenuItem>
                       <MenuItem value={"Âu mỹ"}>Phim Âu Mỹ</MenuItem>
                       <MenuItem value={"TV Show"}>TV Show</MenuItem>
+                      <MenuItem value={"Đặc sắc"}>Đặc Sắc</MenuItem>
                     </Select>
                     <FormHelperText>Mời bạn chọn thể loại phim</FormHelperText>
                   </FormControl>

@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import Button from "@mui/material/Button";
 import { Paper, Stack } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import styles from "./WatchFilm.module.css";
 import axios from "axios";
+
 // Icon
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import VolumeOffIcon from "@mui/icons-material/VolumeOff";
-import { useTransition } from "react";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export default function WatchFilm() {
   const [value, setValue] = React.useState(0);
@@ -57,9 +54,21 @@ export default function WatchFilm() {
     >
       <div className={styles["motion-background"]}>
         {/* <img src={test[0]?.imgBG} /> */}
-        <embed
+        {/* <embed
           style={{ width: "100%", height: "100%" }}
           src={convertURL("https://www.youtube.com/watch?v=9gitpjz97ZY")}
+        /> */}
+        <Link to="/film/homePage">
+          <div className={styles["btn-back"]}>
+            <ArrowBackIosIcon fontSize="large" />
+          </div>
+        </Link>
+        <video
+          id="myVideo"
+          src={filmDetail?.trailerURL}
+          style={{ height: "100%", width: "100%", overflow: "hidden" }}
+          autoPlay
+          controls
         />
       </div>
     </Paper>

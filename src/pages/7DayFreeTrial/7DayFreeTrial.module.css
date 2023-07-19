@@ -93,3 +93,11 @@
   text-align: left;
   color: #ffffff;
 }
+
+.btn-back {
+  z-index: 1;
+  position: absolute;
+  color: #fff;
+  margin-top: 3%;
+  margin-left: 5%;
+}

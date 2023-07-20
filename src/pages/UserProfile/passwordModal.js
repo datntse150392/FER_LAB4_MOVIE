@@ -14,6 +14,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Grid from "@mui/material/Grid";
 import FormHelperText from "@mui/material/FormHelperText";
+import { Alert, AlertTitle, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from "@mui/material";
+
 
 const style = {
   position: "absolute",
@@ -38,6 +40,7 @@ export default function BasicModal() {
   const [helperText2, setHelperText2] = useState("");
   //SET ERROR CHO NHẬP LẠI PASSWORD CŨ
 
+  const [isFinish, setIsFinish] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -55,7 +58,7 @@ export default function BasicModal() {
         try {
           const response = await fetch(
             "https://64acf61eb470006a5ec514b7.mockapi.io/movie/account?email=" +
-              localStorage.getItem("email"),
+            localStorage.getItem("email"),
             {
               method: "GET",
               headers: { "content-type": "application/json" },
@@ -63,15 +66,14 @@ export default function BasicModal() {
           );
 
           if (response.ok) {
-            console.log("Successfully");
+            console.log("Successfully lấy thông tin password");
             const tasks = await response.json();
-            console.log("API: ", tasks);
             setPassword(tasks[0].password);
           } else {
-            console.log("Fail");
+            console.log("Fail lấy thông tin password");
           }
         } catch (error) {
-          console.log("Fail: ", error);
+          console.log("Fail lấy thông tin password: ", error);
         }
       };
       getAccountID();
@@ -340,7 +342,6 @@ export default function BasicModal() {
       formik.setFieldValue("stringInputRePassword", stringRePassword);
       const checkedOldPassword = handleInputOldPassword();
       const checked = handleCompare(stringPassword, stringRePassword);
-      console.log("checkedOldPassword: ", checkedOldPassword);
       if (checked && checkedOldPassword) {
         setHelperText2("");
         setError2(false);
@@ -352,10 +353,9 @@ export default function BasicModal() {
   });
 
   const handleUpdateProfile = (values) => {
-    console.log("UPADTE: ", values);
     fetch(
       `https://64acf61eb470006a5ec514b7.mockapi.io/movie/account/` +
-        localStorage.getItem("id"),
+      localStorage.getItem("id"),
       {
         method: "PUT", // or PATCH
         headers: { "content-type": "application/json" },
@@ -364,16 +364,22 @@ export default function BasicModal() {
     )
       .then((res) => {
         if (res.ok) {
-          console.log("Successfully");
+          console.log("Successfully update password");
           setPassword(values);
+          setIsFinish(true);
           return res.json();
         } else {
-          console.log("Fail");
+          console.log("Fail update password");
         }
       })
       .catch((error) => {
-        console.log("Fail: ", error);
+        console.log("Fail update password: ", error);
       });
+  };
+
+  //XỬ LÝ POPUP THÔNG BÁO
+  const handleCloseFinish = () => {
+    setIsFinish(false);
   };
 
   return (
@@ -612,6 +618,27 @@ export default function BasicModal() {
           </Stack>
         </Box>
       </Modal>
+
+      <Dialog
+        open={isFinish}
+        onClose={handleCloseFinish}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Congraturation"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Alert severity="success">
+              <AlertTitle>Đổi mật khẩu thành công</AlertTitle>
+            </Alert>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleCloseFinish}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

@@ -1,27 +1,13 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 
-export default function PaypalModal({ packageInfo, expiredDate, setIsFinish }) {
-  console.log("Packaged Info : ", packageInfo);
+export default function PaypalModal({ packageInfo, expiredDate, setIsFinish, price }) {
+  console.log(packageInfo)
   const [ErrorMessage, setErrorMessage] = useState("");
   const [orderID, setOrderID] = useState(false);
-  console.log(expiredDate);
 
-  //OUTLINE FUNCTION
-  function convertVNDtoUSD(amount) {
-    return amount / 23000;
-  }
 
-  function convertVNDtoUSD(amount) {
-    return Math.round(Math.round(amount / 23000));
-  }
-
-  const price = useMemo(
-    () => convertVNDtoUSD(packageInfo.salePrice),
-    [packageInfo]
-  );
-  //END OUTLINE FUNCTION
 
   async function handleChangeStatusAccount(accountID, expiredDate) {
     const res = await fetch(
@@ -99,7 +85,7 @@ export default function PaypalModal({ packageInfo, expiredDate, setIsFinish }) {
             description: "Thanh toán gói xem phim: " + packageInfo.slug,
             amount: {
               currency_code: "USD",
-              value: convertVNDtoUSD(packageInfo.salePrice),
+              value: price,
             },
           },
         ],

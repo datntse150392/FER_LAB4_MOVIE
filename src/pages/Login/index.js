@@ -3,9 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { images } from "../../assets/images";
 import styles from "./Login.module.css";
 import jwt_decode from "jwt-decode";
+
+// IMPORT MUI
+import { Alert, AlertTitle, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Button } from "@mui/material";
+
 export default function Login() {
   const [show, setShow] = useState("false");
   const [date, setDate] = useState(new Date().toJSON());
+  const [isFinish, setIsFinish] = useState(false);
+  const [message, setMessage] = useState();
 
   useEffect(() => {
     /* global google*/
@@ -47,7 +53,7 @@ export default function Login() {
         }
         // handle error
       })
-      .then(() => {})
+      .then(() => { })
       .catch((error) => {
         // handle error
       });
@@ -75,7 +81,7 @@ export default function Login() {
         if (tasks.length !== 0) {
           localStorage.setItem("accessToken", true);
           localStorage.setItem("email", decodedObj?.email);
-          localStorage.setItem("name", decodedObj?.name);
+          localStorage.setItem("name", tasks[0].fullName);
           localStorage.setItem("images", decodedObj?.picture);
           localStorage.setItem("gender", tasks[0].gender);
           localStorage.setItem("memberShip", tasks[0].memberShip);
@@ -151,9 +157,56 @@ export default function Login() {
     password: "",
   });
 
-  console.log(account);
-  const hanlerLoginAccount = () => {
+  //XỬ LÝ ĐĂNG NHẬP BẰNG TÀI KHOẢN MẬT KHẨU
+  const hanlerLoginAccount = (e) => {
+    e.preventDefault();
     console.log(account);
+    const handleLoginNormal = () => {
+      console.log(account);
+      fetch(
+        `https://64acf61eb470006a5ec514b7.mockapi.io/movie/account?email=${account.email}`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      )
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          // handle error
+        })
+        .then((tasks) => {
+          if (tasks.length !== 0) {
+            if (tasks[0].password == account.password) {
+              localStorage.setItem("accessToken", true);
+              localStorage.setItem("email", tasks[0].email);
+              localStorage.setItem("name", tasks[0].fullName);
+              localStorage.setItem("images", tasks[0].avatar);
+              localStorage.setItem("gender", tasks[0].gender);
+              localStorage.setItem("memberShip", tasks[0].memberShip);
+              localStorage.setItem("phone", tasks[0].phone);
+              CheckExpiredDate();
+              navigate("/film/homePage");
+              window.location.reload();
+            } else {
+              setIsFinish(true);
+              setMessage("Sai mật khẩu");
+            }
+          } else if (tasks.length === 0) {
+            setIsFinish(true);
+            setMessage("Tài khoản không tồn tại");
+          }
+        })
+        .catch((error) => {
+        });
+    }
+    handleLoginNormal()
+  };
+
+  //XỬ LÝ POPUP THÔNG BÁO
+  const handleCloseFinish = () => {
+    setIsFinish(false);
   };
 
   return (
@@ -169,7 +222,7 @@ export default function Login() {
         <div className={styles["login-content-top"]}>
           <h1>Đăng nhập</h1>
           <form
-            onSubmit={hanlerLoginAccount()}
+            onSubmit={e => hanlerLoginAccount(e)}
             className={styles["login-form"]}
           >
             <input
@@ -194,7 +247,7 @@ export default function Login() {
                 }))
               }
             />
-            <buttom className={styles["login-content-btn"]}>Đăng nhập</buttom>
+            <button type="submit" className={styles["login-content-btn"]}>Đăng nhập</button>
             <h4
               style={{
                 color: "white",
@@ -254,6 +307,28 @@ export default function Login() {
           )}
         </div>
       </div>
+
+      {/* //XỬ LÝ POPUP ERROR SAI PASSWORD HOẶC TÀI KHOẢN KHÔNG TỒN TẠI */}
+      <Dialog
+        open={isFinish}
+        onClose={handleCloseFinish}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Ối!!! Lỗi rồi"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Alert severity="error">
+              <AlertTitle>{message}</AlertTitle>
+            </Alert>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleCloseFinish}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

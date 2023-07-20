@@ -82,6 +82,7 @@ export default function Payment() {
   x = x.toLocaleString("it-IT", { style: "currency", currency: "VND" });
 
   function handleOnChange(e) {
+
     switch (e.target.value) {
       case "1":
         navigate("/pay/1");
@@ -96,6 +97,7 @@ export default function Payment() {
         navigate("/pay/4");
         // expireDate.setMonth(expireDate.getMonth() + 12);
         break;
+        setReset(!reset);
     }
   }
 
@@ -168,9 +170,12 @@ export default function Payment() {
     if (reset === false) {
       setReset(true);
     }
+
   }
 
-  useEffect(() => {}, [reset]);
+  useEffect(() => { }, [reset]);
+
+
 
   const handlePaymentOnClickActive = (paymentItem) => {
     const paymentMethodActive = document.querySelector(
@@ -192,6 +197,15 @@ export default function Payment() {
     handlePaymentOnClickActive(paymentItem);
   };
 
+  //OUTLINE FUNCTION
+
+  function convertVNDtoUSD(amount) {
+    return Math.round(Math.round(amount / 23000));
+  }
+
+  var price = convertVNDtoUSD(Package.salePrice);
+  //END OUTLINE FUNCTION
+
   // Generate the QR code
   const PaymentHisURL = "https://oauth.casso.vn/v2/transactions";
   const headers = {
@@ -205,7 +219,6 @@ export default function Payment() {
     if (sessionStorage.getItem("specialNum") == null) {
       sessionStorage.setItem("specialNum", random);
     }
-    console.log("Im here");
 
     if (reset === true) {
       setReset(false);
@@ -222,8 +235,8 @@ export default function Payment() {
 
           var filtered = data.data.records.filter((record) => {
             return record.description.includes(
-              // sessionStorage.getItem("specialNum")
-              39709
+              sessionStorage.getItem("specialNum")
+
             );
           });
           if (filtered.length !== 0) {
@@ -531,7 +544,7 @@ export default function Payment() {
                         className="payment-method-item active vnpay"
                       >
                         <div className="payment-method-item-image">
-                          <p>VN Pay</p>
+                          <p>Viet QR</p>
                           <img
                             alt=""
                             style={{
@@ -730,6 +743,7 @@ export default function Payment() {
                     packageInfo={Package}
                     setIsFinish={setIsFinish}
                     expiredDate={expiredDate}
+                    price={price}
                   />
                 )}
               </div>

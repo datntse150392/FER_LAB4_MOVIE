@@ -237,9 +237,15 @@ function App() {
         <Route
           path="/film/WatchFilm/:id"
           element={
-            <Fragment>
-              <WatchFilm />
-            </Fragment>
+            localStorage.getItem("memberShip") == "true" ? (
+              <Fragment>
+                <WatchFilm />
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Login />
+              </Fragment>
+            )
           }
         />
         {/* Watching Film */}
